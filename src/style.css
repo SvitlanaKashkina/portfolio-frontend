@@ -1,5 +1,29 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --primary-color: #1FE7FF;
+  --background-color: #272E37;
+  --font-family: Arial, sans-serif;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+.main-content {
+  flex: 1;
+}
+footer {
+  padding: 1rem 0;
+  text-align: center;
+  color: azure;
 }
