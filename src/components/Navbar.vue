@@ -1,7 +1,35 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+
+const homeContent = ref(null)
+
+// request to backend
+const fetchHomeContent = async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/home`
+    )
+    homeContent.value = response.data
+    console.log('Navbar home content:', homeContent.value)
+  } catch (error) {
+    console.error('Error loading Home data:', error)
+  }
+}
+
+onMounted(() => {
+  fetchHomeContent()
+})
+</script>
+
+
 <template>
   <nav class="navbar">
     <div class="nav-left">
-      <a href="#home" class="name">Svitlana Kashkina</a>
+      <span v-if="homeContent" class="name">
+        {{ homeContent.fullName }}
+      </span>
+      <span v-else>Loading...</span>
     </div>
     <ul class="nav-right">
         <li><router-link to="/">Home</router-link></li>
@@ -20,6 +48,7 @@
   align-items: center;
   padding: 20px 40px;
   position: relative;
+  background-color: #272E37;
 }
 .nav-left .name {
   text-decoration: none;

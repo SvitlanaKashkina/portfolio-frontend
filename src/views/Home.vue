@@ -1,17 +1,37 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import axios from 'axios'
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import myVideo from '../assets/video/my-video.mp4'
-import github from '@/assets/icons/github.png'
-import linkedin from '@/assets/icons/linkedin.png'
-import email from '@/assets/icons/email.png'
+import githubIcon from '@/assets/icons/github.png'
+import linkedinIcon from '@/assets/icons/linkedin.png'
+import emailIcon from '@/assets/icons/email.png'
 
 const videoSrc = myVideo
 const heroVideo = ref(null)
 
-onMounted(() => {
+const homeData = ref({
+  fullName: '',
+  roleTitle: '',
+  roleType: '',
+  shortBio: '',
+  githubUrl: '',
+  linkedinUrl: ''
+})
+
+// Getting data from the backend
+onMounted(async () => {
   heroVideo.value.playbackRate = 0.3
+
+  try {
+    console.log(import.meta.env.VITE_API_URL)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/home`)
+    homeData.value = response.data
+    console.log('Home data:', homeData.value)
+  } catch (error) {
+    console.error('Error loading Home data:', error)
+  }
 })
 </script>
 
@@ -25,27 +45,27 @@ onMounted(() => {
 
         <!-- Left block -->
         <div class="text-block">
-          <p>Java Softwareentwicklerin</p>
-          <p>Backend & Fullstack</p>
-          <p>Java, Spring Boot, Vue und JavaScript sind für mich nicht nur Werkzeuge, sondern ein fester Bestandteil meines Lebens und meiner Art zu denken. Mit ihrer Hilfe setze ich Ideen gerne in funktionierende Anwendungen um.</p>
+          <p>{{ homeData.roleTitle }}</p>
+          <p>{{ homeData.roleType }}</p>
+          <p>{{ homeData.shortBio }}</p>
 
           <!-- Icons -->
           <div class="social-icons">
-            <a href="https://www.linkedin.com/in/svitlana-kashkina-12a0922b4/" target="_blank" rel="noopener noreferrer">
-              <img :src="linkedin" alt="LinkedIn" />
+            <a :href="homeData.linkedinUrl" target="_blank" rel="noopener noreferrer">
+              <img :src="linkedinIcon" alt="LinkedIn" />
             </a>
-            <a href="https://github.com/SvitlanaKashkina" target="_blank" rel="noopener noreferrer">
-               <img :src="github" alt="GitHub" />
+            <a :href="homeData.githubUrl" target="_blank" rel="noopener noreferrer">
+              <img :src="githubIcon" alt="GitHub" />
             </a>
             <a href="/contact">
-              <img :src="email" alt="Email" />
+              <img :src="emailIcon" alt="Email" />
             </a>
           </div>
         </div>
 
         <!-- Right block -->
         <div class="photo-block">
-          <video
+           <video
             ref="heroVideo"
             :src="videoSrc"
             autoplay

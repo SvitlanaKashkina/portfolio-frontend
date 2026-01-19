@@ -10,9 +10,12 @@
 <style scoped>
 footer {
   position: relative;
-  padding: 0 1rem;
+  align-items: center;
+  justify-content: center;
+  padding:  2px 0 3px 0;
   height: 40px;
   box-sizing: border-box;
+  background-color: #272E37;
 }
 footer::before {
   content: "";
