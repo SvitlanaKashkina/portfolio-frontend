@@ -1,8 +1,7 @@
 <template>
   <footer>
     <div class="footer-content">
-      <span>2026 Svitlana Kashkina</span>
-      <span>&copy; All rights reserved</span>
+        &copy; 2026 Svitlana Kashkina. All rights reserved.
     </div>
   </footer>
 </template>

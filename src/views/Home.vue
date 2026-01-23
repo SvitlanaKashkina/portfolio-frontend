@@ -38,7 +38,6 @@ onMounted(async () => {
 
 <template>
   <div class="home-page">
-    <Navbar />
 
     <div class="content" id="home">
       <div class="text-photo-container">
@@ -82,7 +81,7 @@ onMounted(async () => {
 </template>
 
 
-<style scoped>
+<style >
 /* General background and text */
 .home-page {
   flex: 1;
@@ -102,6 +101,7 @@ onMounted(async () => {
   align-items: flex-start;
   justify-content: flex-start;
   color: white;
+  margin: 80px 0 0 0;
   padding: 40px;
   font-family: Arial, sans-serif;
   box-sizing: border-box;

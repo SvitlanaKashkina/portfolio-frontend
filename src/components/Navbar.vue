@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { RouterLink } from 'vue-router'
 
 const homeContent = ref(null)
 
@@ -41,14 +42,18 @@ onMounted(() => {
   </nav>
 </template>
 
-<style scoped>
+<style>
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  position: relative;
+  padding: 15px 40px;
   background-color: #272E37;
+  width: 96%;
 }
 .nav-left .name {
   text-decoration: none;

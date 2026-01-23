@@ -1,8 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import Navbar from '../components/Navbar.vue'
-import Footer from '../components/Footer.vue'
 import bgImage from '../assets/background/about.png'
 import Foto from '../assets/myFoto/foto.jpg'
 import Tenis from '../assets/myFoto/tenis.png'
@@ -43,7 +41,6 @@ onMounted(() => {
 
 
 <template>
-  <Navbar />
   <main class="main-content about-section" :style="{ backgroundImage: `url(${bgImage})` }">
 
     <!-- Main container for text and photos -->
@@ -88,9 +85,14 @@ onMounted(() => {
           </div>
       </div>
     </div>
+    <footer>
+      <div class="footer-content">
+        &copy; 2026 Svitlana Kashkina. All rights reserved.
+      </div>
+    </footer>
   </main>
 
-  <Footer />
+
 </template>
 
 
@@ -100,13 +102,14 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
 }
 .about-content {
   background-color: #272E37;
   border: 4px solid #1e242b;
   border-radius: 2%;
-  padding: 0px 20px 0 20px;
-  margin: 30px 220px 30px 220px;
+  padding: 0;
+  margin: 60px 220px 30px 220px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -114,10 +117,12 @@ onMounted(() => {
 }
 .about-title {
   padding: 0;
-  margin: 25px 0 0 0;
+  margin: 0;
   text-align: center;
   color: #1FE7FF;
   font-size: 50px;
+  -webkit-text-stroke: 1px rgb(8, 8, 8);
+  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
 }
 .about-body {
   display: flex;
@@ -136,12 +141,15 @@ onMounted(() => {
   font-size: 30px;
   font-weight: 600;
   margin: 0 32px 0 16px;
+ -webkit-text-stroke: 1px rgb(8, 8, 8);
+  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
 }
 .about-text p {
   color: #ffffff;
   font-size: 20px;
   margin: 10px 25px 35px 16px;
   line-height: 1.6;
+  text-shadow: 3px 3px 3px rgba(3,3,3,0.7);
 }
 .about-text ul {
   margin: 12px 0 24px 20px;
@@ -191,5 +199,21 @@ onMounted(() => {
   margin: 100px 0 0 30px;
   width: 350px;
   height: 500px;
+}
+footer {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: 1px;
+  box-sizing: border-box;
+}
+.footer-content {
+  display: flex;
+  justify-content: center;
+  gap: clamp(40px, 8vw, 100px);
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
 }
 </style>

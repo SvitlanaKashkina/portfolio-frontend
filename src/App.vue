@@ -1,15 +1,16 @@
 <script setup>
 import { ref } from 'vue';
+import Navbar from './components/Navbar.vue'
 
 const message = ref("Hello Portfolio");
 </script>
 
 <template>
-   <div>
-    <router-view></router-view>
+  <Navbar />
+  <div class="page-content">
+    <router-view/>
   </div>
 </template>
 
-<style scoped>
-
+<style>
 </style>
