@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import myVideo from '../assets/video/my-video.mp4'
-import githubIcon from '@/assets/icons/github.png'
-import linkedinIcon from '@/assets/icons/linkedin.png'
-import emailIcon from '@/assets/icons/email.png'
+import githubIcon from '../assets/icons/github.png'
+import linkedinIcon from '../assets/icons/linkedin.png'
+import emailIcon from '../assets/icons/email.png'
 
 const videoSrc = myVideo
 const heroVideo = ref(null)
@@ -185,6 +184,10 @@ onMounted(async () => {
   border-radius: 10px;
   padding: 3px;
   box-sizing: border-box;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 .photo-block img,
 .photo-block video {

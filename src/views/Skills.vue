@@ -1,15 +1,12 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
-import Navbar from '../components/Navbar.vue';
-import Footer from '../components/Footer.vue';
 import bgImage from '../assets/background/about.png';
 
-// реактивные переменные
 const techStack = ref([]);
 const technicalSkills = ref([]);
 const softSkills = ref([]);
-
+const apiUrl = import.meta.env.VITE_API_URL
 
 const fetchSkills = async () => {
   try {
@@ -95,8 +92,8 @@ onMounted(() => {
   background-color: #272E37;
   border: 4px solid #1e242b;
   border-radius: 3%;
-  padding: 0 0 10px 50px;
-  margin: 15px 350px 30px 350px;
+  padding: 15px 0 10px 50px;
+  margin: 15px 370px 30px 370px;
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
@@ -105,7 +102,7 @@ onMounted(() => {
 .section-title {
   text-align: center;
   font-size: 35px;
-  margin: 30px 0 5px 0;
+  margin: 10px 0 5px 0;
   font-weight: bold;
   color: #0899ec;
   -webkit-text-stroke: 1px rgb(8, 8, 8);

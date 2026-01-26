@@ -5,6 +5,7 @@ import bgImage from '../assets/background/about.png'
 import Foto from '../assets/myFoto/foto.jpg'
 import Tenis from '../assets/myFoto/tenis.png'
 import Icons from '../assets/myFoto/icons.png'
+import cvFile from '../assets/cv/Svitlana_Kashkina_CV.pdf';
 
 const aboutSections = ref([])
 const certificates = ref([])
@@ -37,13 +38,22 @@ const fetchAboutMe = async () => {
 onMounted(() => {
   fetchAboutMe()
 })
+
+function downloadCV() {
+  const link = document.createElement('a');
+  link.href = cvFile; // путь к PDF
+  link.download = 'Svitlana_Kashkina_CV.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 </script>
 
 
 <template>
   <main class="main-content about-section" :style="{ backgroundImage: `url(${bgImage})` }">
 
-    <!-- Main container for text and photos -->
+    <!-- container for text and photos -->
     <div class="about-content debug-border">
 
       <h1 class="about-title">About Me</h1>
@@ -75,6 +85,13 @@ onMounted(() => {
                   <p v-html="section.content"></p>
                 </div>
               </template>
+
+              <!-- Download-CV-->
+               <div class="cv-container">
+                  <button @click="downloadCV" class="cv-button">
+                    📄 Download CV
+                  </button>
+               </div>
           </div>
 
           <!-- Right block: foto -->
@@ -104,6 +121,7 @@ onMounted(() => {
   background-repeat: no-repeat;
 
 }
+/* container for text and photos */
 .about-content {
   background-color: #272E37;
   border: 4px solid #1e242b;
@@ -167,13 +185,35 @@ onMounted(() => {
   font-size: 20px;
   line-height: 1.6;
 }
+/* CV  */
+.cv-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.cv-button {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #272E37;
+  background-color: #1FE7FF;
+  border: 4px solid #3F4958;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cv-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(30, 231, 255, 0.6);
+}
+/* Fotos */
 .about-photos {
   width: 30%;
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
-  gap: 20px;
+  gap: 15px;
 }
 .about-photos img {
   width: 100%;
@@ -182,25 +222,37 @@ onMounted(() => {
 }
 .about-photos .myFoto {
   border: 3px solid #07c7f7;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   border-radius: 50%;
   width: 80%;
-  margin: 5px 0 20px 30px;
+  margin: 5px 0 30px 30px;
 }
 .about-photos .icons {
   border: 3px solid #07c7f7;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   border-radius: 5%;
-  margin: 100px 0 20px 25px;
+  margin: 30px 0 30px 25px;
   width: 350px;
   height: 500px;
 }
 .about-photos .tenis {
   border: 3px solid #07c7f7;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   border-radius: 5%;
-  margin: 100px 0 0 30px;
+  margin: 30px 0 10px 30px;
   width: 350px;
   height: 500px;
 }
-footer {
+.footer {
   position: relative;
   align-items: center;
   justify-content: center;

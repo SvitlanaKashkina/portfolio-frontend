@@ -26,3 +26,8 @@ footer {
   text-align: center;
   color: azure;
 }
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}

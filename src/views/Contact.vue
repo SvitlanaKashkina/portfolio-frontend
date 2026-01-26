@@ -60,39 +60,39 @@
 
         <!-- Left form -->
         <div class="contact-form-container">
-          <h2>Kontaktformular</h2>
+          <h2>Contact Form</h2>
           <form @submit.prevent="submitForm">
             <div class="form-group">
               <label for="name">Name *</label>
-              <input type="text" v-model="form.name" id="name" placeholder="Ihr Name" required/>
+              <input type="text" v-model="form.name" id="name" placeholder="Your Name" required/>
             </div>
 
             <div class="form-group">
               <label for="email">E-Mail *</label>
-              <input type="email" v-model="form.email" id="email" placeholder="Ihre E-Mail" required />
+              <input type="email" v-model="form.email" id="email" placeholder="Your Email" required />
             </div>
 
             <div class="form-group">
-              <label for="subject">Betreff *</label>
-              <input type="text" v-model="form.subject" id="subject" placeholder="Betreff" required/>
+              <label for="subject">Subject *</label>
+              <input type="text" v-model="form.subject" id="subject" placeholder="Subject" required/>
             </div>
 
             <div class="form-group">
-              <label for="message">Nachricht *</label>
-              <textarea v-model="form.message" id="message" placeholder="Ihre Nachricht" required></textarea>
+              <label for="message">Message *</label>
+              <textarea v-model="form.message" id="message" placeholder="Your Message" required></textarea>
             </div>
 
             <div class="form-group">
-              <label for="phone">Telefon</label>
-              <input type="text" v-model="form.phone" id="phone" placeholder="Ihre Telefonnummer (optional)" />
+              <label for="phone">Phone</label>
+              <input type="text" v-model="form.phone" id="phone" placeholder="Your Phone Number (optional)" />
             </div>
 
             <div class="form-group consent">
               <input type="checkbox" v-model="form.consent" id="consent" required />
-              <label for="consent">Ich stimme der Verarbeitung meiner personenbezogenen Daten gemäß DSGVO zu *</label>
+              <label for="consent">I agree to the processing of my personal data *</label>
             </div>
 
-            <button type="submit">Senden</button>
+            <button type="submit">Send</button>
           </form>
 
           <div v-if="successMessage" class="success-message">
@@ -105,7 +105,7 @@
 
         <!-- Right block -->
         <div class="contact-info-block">
-          <!-- Карта -->
+
             <div
               class="location-card"
               @click="openMap"
@@ -157,8 +157,8 @@
 /* left block */
 .contact-form-container {
   flex: 2;
-  margin: 70px 80px 0 80px;
-  padding: 10px 50px 35px 50px;
+  margin: 55px 80px 0 80px;
+  padding: 5px 50px 30px 50px;
   background-color: #3F4958;
   border: 4px solid #272E37;
   border-radius: 20px;
@@ -166,7 +166,7 @@
   color: #1FE7FF;
 }
 h2 {
-  margin: 10px 0 20px 0 ;
+  margin: 10px 0 10px 0 ;
   text-align: center;
   font-size: 40px;
   color: #1FE7FF;
@@ -174,7 +174,7 @@ h2 {
   text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
 }
 .form-group {
-  margin: 13px 0 4px 0;
+  margin: 13px 0 6px 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -186,6 +186,7 @@ h2 {
 input[type="text"]{
   border: 1px solid rgb(51, 51, 51);
   padding: 0.5rem;
+  margin: 5px 0 0 0;
   border-radius: 0.30rem;
   border: 2px solid #272E37;
   font-size: 15px;
@@ -201,6 +202,7 @@ input[type="email"] {
 }
 textarea {
   padding: 0.5rem;
+  margin: 5px 0 0 0;
   border-radius: 4px;
   border: 1px solid #ccc;
   height: 100px;
@@ -212,7 +214,7 @@ textarea {
   flex-direction: row;
   align-items: center;
   font-size: 15px;
-  margin: 20px 0 30px 0;
+  margin: 18px 0 20px 0;
 }
 button {
   width: 100%;
@@ -229,7 +231,7 @@ button:hover {
   background-color: #0056b3;
 }
 .success-message {
-  margin: 15px 0 0 20px;
+  margin: 13px 0 0 20px;
   color: green;
   font-size: 20px;
   font-weight: 600;
@@ -240,7 +242,7 @@ button:hover {
   font-family: 'Arial', 'Helvetica', sans-serif;
 }
 .error-message {
-  margin: 15px 0 0 20px;
+  margin: 13px 0 0 20px;
   color: red;
   font-size: 25px;
   font-weight: 600;
