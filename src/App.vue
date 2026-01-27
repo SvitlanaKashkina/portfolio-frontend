@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 import Navbar from './components/Navbar.vue'
-
-const message = ref("Hello Portfolio");
+import ErrorBanner from './components/ErrorBanner.vue'
 </script>
 
 <template>
+  <ErrorBanner />
   <Navbar />
   <div class="page-content">
     <router-view/>

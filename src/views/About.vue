@@ -5,16 +5,22 @@ import bgImage from '../assets/background/about.png'
 import Foto from '../assets/myFoto/foto.jpg'
 import Tenis from '../assets/myFoto/tenis.png'
 import Icons from '../assets/myFoto/icons.png'
-import cvFile from '../assets/cv/Svitlana_Kashkina_CV.pdf';
+import cvFile from '../assets/cv/Svitlana_Kashkina_CV.pdf'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
+import { message } from '../components/ErrorBanner.vue' // global Errorbanner
 
+// Component states
 const aboutSections = ref([])
 const certificates = ref([])
+const loading = ref(true)
+const localError = ref('') // local error for data block
 
-// Backend URL via environment variable
 const apiUrl = import.meta.env.VITE_API_URL
 
-// Getting data from the backend
+// Receiving data
 const fetchAboutMe = async () => {
+  loading.value = true
+  localError.value = '' // local error reset
   try {
     const response = await axios.get(`${apiUrl}/about`)
     const data = response.data
@@ -23,93 +29,99 @@ const fetchAboutMe = async () => {
     certificates.value = data.certificates || []
 
     const desiredOrder = ['about', 'experience', 'education', 'hobbies']
-
-    aboutSections.value.sort((a, b) => {
-      const aIndex = desiredOrder.indexOf(a.sectionKey)
-      const bIndex = desiredOrder.indexOf(b.sectionKey)
-      return aIndex - bIndex
-    })
-
+    aboutSections.value.sort((a, b) => desiredOrder.indexOf(a.sectionKey) - desiredOrder.indexOf(b.sectionKey))
   } catch (error) {
     console.error('Error loading About Me:', error)
+    localError.value = 'Fehler beim Laden der About-Daten.' // local message
+    message.value = 'Es ist ein Fehler beim Laden der About-Seite aufgetreten.' // global message
+    setTimeout(() => message.value = '', 5000)
+  } finally {
+    loading.value = false
   }
 }
 
+// onMounted
 onMounted(() => {
   fetchAboutMe()
 })
 
+// Upload CV
 function downloadCV() {
-  const link = document.createElement('a');
-  link.href = cvFile; // путь к PDF
-  link.download = 'Svitlana_Kashkina_CV.pdf';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  try {
+    const link = document.createElement('a')
+    link.href = cvFile
+    link.download = 'Svitlana_Kashkina_CV.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } catch (error) {
+    console.error('Failed to download CV: ', error)
+    message.value = 'CV konnte nicht heruntergeladen werden.'
+    setTimeout(() => message.value = '', 5000)
+  }
 }
 </script>
 
 
 <template>
   <main class="main-content about-section" :style="{ backgroundImage: `url(${bgImage})` }">
+    <!-- Spinner -->
+    <LoadingSpinner :visible="loading" />
 
-    <!-- container for text and photos -->
-    <div class="about-content debug-border">
+    <!-- Content or local error -->
+    <div v-if="!loading">
+      <div v-if="localError" class="error-text">{{ localError }}</div>
 
-      <h1 class="about-title">About Me</h1>
+      <div v-else class="about-content debug-border">
+        <h1 class="about-title">About Me</h1>
 
-      <!-- Container for text and photos -->
-      <div class="about-body">
-
-          <!-- Leftt block: info -->
+        <div class="about-body">
+          <!-- Left block -->
           <div class="about-text debug-border">
+            <template v-for="section in aboutSections" :key="section.sectionKey">
+              <div v-if="section.sectionKey !== 'certificates' && section.sectionKey !== 'hobbies'">
+                <h2>{{ section.title }}</h2>
+                <p v-html="section.content"></p>
+              </div>
+            </template>
 
-              <template v-for="section in aboutSections" :key="section.sectionKey">
-                <div v-if="section.sectionKey !== 'certificates' && section.sectionKey !== 'hobbies'">
-                  <h2>{{ section.title }}</h2>
-                  <p v-html="section.content"></p>
-                </div>
-              </template>
+            <!-- Certificate section -->
+            <h2>Zertifikate</h2>
+            <ul class="certificates-list">
+              <li v-for="cert in certificates" :key="cert.id">
+                {{ cert.name }}{{ cert.issuer ? `, ${cert.issuer}` : '' }}
+              </li>
+            </ul>
 
-              <!-- Certificate section -->
-              <h2>Zertifikate</h2>
-              <ul class="certificates-list">
-                <li v-for="cert in certificates" :key="cert.id">
-                  {{ cert.name }}{{ cert.issuer ? `, ${cert.issuer}` : '' }}
-                </li>
-              </ul>
+            <template v-for="section in aboutSections" :key="section.sectionKey">
+              <div v-if="section.sectionKey === 'hobbies'">
+                <h2>{{ section.title }}</h2>
+                <p v-html="section.content"></p>
+              </div>
+            </template>
 
-              <template v-for="section in aboutSections" :key="section.sectionKey">
-                <div v-if="section.sectionKey === 'hobbies'">
-                  <h2>{{ section.title }}</h2>
-                  <p v-html="section.content"></p>
-                </div>
-              </template>
-
-              <!-- Download-CV-->
-               <div class="cv-container">
-                  <button @click="downloadCV" class="cv-button">
-                    📄 Download CV
-                  </button>
-               </div>
+            <!-- Download-CV -->
+            <div class="cv-container">
+              <button @click="downloadCV" class="cv-button">📄 Download CV</button>
+            </div>
           </div>
 
-          <!-- Right block: foto -->
+          <!-- Right block -->
           <div class="about-photos debug-border">
             <img :src="Foto" alt="Foto" class="myFoto" />
             <img :src="Icons" alt="Foto" class="icons" />
             <img :src="Tenis" alt="Foto" class="tenis" />
           </div>
+        </div>
       </div>
     </div>
+
     <footer>
       <div class="footer-content">
         &copy; 2026 Svitlana Kashkina. All rights reserved.
       </div>
     </footer>
   </main>
-
-
 </template>
 
 

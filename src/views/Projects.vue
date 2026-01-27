@@ -1,58 +1,84 @@
 <script setup>
-    import { ref, onMounted, computed } from "vue";
-    import axios from "axios";
-    import bgImage from '../assets/background/about.png';
-    import githubIcon from '../assets/icons/github.png'
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+import bgImage from '../assets/background/about.png';
+import githubIcon from '../assets/icons/github.png';
+import LoadingSpinner from '../components/LoadingSpinner.vue';
+import { message } from '../components/ErrorBanner.vue' // global Errorbanner
 
-    const project = ref({});
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const staticUrl = import.meta.env.VITE_STATIC_URL;
+// Component states
+const project = ref({});
+const loading = ref(true);
+const localError = ref('');
+const apiUrl = import.meta.env.VITE_API_URL;
+const staticUrl = import.meta.env.VITE_STATIC_URL;
 
-    // Grouping technologies into categories
-    const groupedTechnologies = computed(() => {
-      if (!project.value.technologies) return {};
-      return project.value.technologies.reduce((acc, tech) => {
-        if (!acc[tech.category]) acc[tech.category] = [];
-        acc[tech.category].push(tech);
-        return acc;
-      }, {});
-    });
+// Technology grouping
+const groupedTechnologies = computed(() => {
+  if (!project.value.technologies) return {};
+  return project.value.technologies.reduce((acc, tech) => {
+    if (!acc[tech.category]) acc[tech.category] = [];
+    acc[tech.category].push(tech);
+    return acc;
+  }, {});
+});
 
-    const architectureList = computed(() => {
-      if (!project.value.architectureDescription) return [];
+const architectureList = computed(() => {
+  if (!project.value.architectureDescription) return [];
+  return project.value.architectureDescription
+    .split(/\.\s+|\.\n+/)
+    .map(s => s.trim())
+    .filter(Boolean)
+    .map(s => s + '.');
+});
 
-      return project.value.architectureDescription
-        .split(/\.\s+|\.\n+/)   // 👈 ключевая строка
-        .map(s => s.trim())
-        .filter(Boolean)
-        .map(s => s + '.');
-    });
+// Retrieving Project Data
+const fetchProject = async () => {
+  loading.value = true;
+  localError.value = ''; // local error reset
 
-    onMounted(async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/projects`);
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          project.value = response.data[0];
-          console.log("Project screenshots:", project.value.screenshots);
-        } else {
-          console.warn("No project data received");
-        }
-      } catch (error) {
-        console.error("Error fetching project data:", error);
-      }
-    });
+  try {
+    const response = await axios.get(`${apiUrl}/projects`);
+    if (Array.isArray(response.data) && response.data.length > 0) {
+      project.value = response.data[0];
+      console.log("Project screenshots:", project.value.screenshots);
+    } else {
+      console.warn("No project data received");
+      localError.value = 'Keine Projektdaten erhalten.';
+      message.value = 'Fehler beim Laden der Projektinformationen.';
+      setTimeout(() => message.value = '', 5000);
+    }
+  } catch (error) {
+    console.error("Error fetching project data:", error);
+    localError.value = 'Fehler beim Laden der Projektdaten.';
+    message.value = 'Es ist ein Fehler beim Laden der Projektinformationen aufgetreten.';
+    setTimeout(() => message.value = '', 5000);
+  } finally {
+    loading.value = false;
+  }
+}
+
+// onMounted
+onMounted(() => {
+  fetchProject();
+});
 </script>
 
 
 <template>
-    <main class="project-page" :style="{ backgroundImage: `url(${bgImage})` }">
+  <main class="project-page" :style="{ backgroundImage: `url(${bgImage})` }">
 
-      <h1 class="projects-title">My projects</h1>
+    <!-- Spinner -->
+    <LoadingSpinner :visible="loading" />
 
-      <!-- General block -->
-      <div class="container">
+    <h1 class="projects-title">My projects</h1>
 
-        <!-- Left block: text information-->
+    <div v-if="!loading">
+      <!-- Local error -->
+      <div v-if="localError" class="error-text">{{ localError }}</div>
+
+      <div v-else class="container">
+        <!-- Left block: text information -->
         <div class="project-info">
           <p class="project-name">Project Name: <span class="project-title">"{{ project.title }}"</span></p>
 
@@ -65,31 +91,21 @@
             <h2>Tech Stack:</h2>
             <div v-for="(techList, category) in groupedTechnologies" :key="category" class="tech-category">
               <strong>{{ category }}:</strong>
-              <span>
-                {{ techList.map(tech => tech.name).join(', ') }}
-              </span>
+              <span>{{ techList.map(tech => tech.name).join(', ') }}</span>
             </div>
           </section>
 
           <section v-if="project.features && project.features.length">
             <h2>Key Features:</h2>
             <ul>
-              <li v-for="feature in project.features" :key="feature.id">
-                {{ feature.description }}
-              </li>
+              <li v-for="feature in project.features" :key="feature.id">{{ feature.description }}</li>
             </ul>
           </section>
 
           <section v-if="project.architectureDescription">
             <h2>Architecture / System Design:</h2>
-
             <ul class="dot-list">
-              <li
-                v-for="(item, index) in architectureList"
-                :key="index"
-              >
-                {{ item }}
-              </li>
+              <li v-for="(item, index) in architectureList" :key="index">{{ item }}</li>
             </ul>
           </section>
 
@@ -125,18 +141,19 @@
         <!-- Right block: screenshots -->
         <div class="project-screenshots" v-if="project.screenshots && project.screenshots.length">
           <img v-for="screenshot in project.screenshots" :key="screenshot.id"
-              :src="staticUrl + screenshot.imageUrl"
-              :alt="screenshot.altText"
-              class="project-screenshot-img" />
+               :src="staticUrl + screenshot.imageUrl"
+               :alt="screenshot.altText"
+               class="project-screenshot-img" />
         </div>
       </div>
+    </div>
 
-      <footer>
-        <div class="footer-content">
-          &copy; 2026 Svitlana Kashkina. All rights reserved.
-        </div>
-      </footer>
-    </main>
+    <footer>
+      <div class="footer-content">
+        &copy; 2026 Svitlana Kashkina. All rights reserved.
+      </div>
+    </footer>
+  </main>
 </template>
 
 

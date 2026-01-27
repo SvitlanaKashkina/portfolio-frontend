@@ -2,13 +2,17 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import Footer from '../components/Footer.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 import myVideo from '../assets/video/my-video.mp4'
 import githubIcon from '../assets/icons/github.png'
 import linkedinIcon from '../assets/icons/linkedin.png'
 import emailIcon from '../assets/icons/email.png'
+import { message } from '../components/ErrorBanner.vue' // global error
 
 const videoSrc = myVideo
 const heroVideo = ref(null)
+const loading = ref(true)
+const localError = ref('') // local error for div
 
 const homeData = ref({
   fullName: '',
@@ -19,28 +23,47 @@ const homeData = ref({
   linkedinUrl: ''
 })
 
-// Getting data from the backend
-onMounted(async () => {
-  heroVideo.value.playbackRate = 0.3
+const apiUrl = import.meta.env.VITE_API_URL
+
+// Receiving data
+const fetchHomeData = async () => {
+  loading.value = true
+  localError.value = '' // resetting the local error
 
   try {
-    console.log(import.meta.env.VITE_API_URL)
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/home`)
+    const response = await axios.get(`${apiUrl}/home`)
     homeData.value = response.data
-    console.log('Home data:', homeData.value)
+
   } catch (error) {
     console.error('Error loading Home data:', error)
+    localError.value = 'Fehler beim Laden der Home-Daten.' // local message
+    // global error via ErrorBanner
+    message.value = 'Es ist ein Fehler aufgetreten beim Laden der Home-Seite.'
+    setTimeout(() => message.value = '', 5000)
+  } finally {
+    loading.value = false
   }
+}
+
+onMounted(() => {
+  heroVideo.value.playbackRate = 0.3
+  fetchHomeData() // errors will be caught by a local try-catch and a global ErrorBanner
 })
 </script>
 
 
 <template>
   <div class="home-page">
+    <!-- Spinner -->
+    <LoadingSpinner :visible="loading" />
 
-    <div class="content" id="home">
-      <div class="text-photo-container">
+    <!-- Content -->
+    <div v-if="!loading" class="content" id="home">
 
+      <!-- If there is a local error, we show it instead of the content -->
+      <div v-if="localError" class="error-text">{{ localError }}</div>
+
+      <div v-else class="text-photo-container">
         <!-- Left block -->
         <div class="text-block">
           <p>{{ homeData.roleTitle }}</p>
@@ -63,7 +86,7 @@ onMounted(async () => {
 
         <!-- Right block -->
         <div class="photo-block">
-           <video
+          <video
             ref="heroVideo"
             :src="videoSrc"
             autoplay

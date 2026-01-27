@@ -2,63 +2,90 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import bgImage from '../assets/background/about.png';
+import LoadingSpinner from '../components/LoadingSpinner.vue';
+import { message } from '../components/ErrorBanner.vue' // global banner
 
+
+// Component states
 const techStack = ref([]);
 const technicalSkills = ref([]);
 const softSkills = ref([]);
+const loading = ref(true);
+const localError = ref(''); // local error for data block
+
 const apiUrl = import.meta.env.VITE_API_URL
 
+// Receiving data
 const fetchSkills = async () => {
+  loading.value = true
+  localError.value = '' // local error reset
   try {
     const response = await axios.get(`${apiUrl}/skills`);
     techStack.value = response.data.techStack;
     technicalSkills.value = response.data.technicalSkills;
     softSkills.value = response.data.softSkills;
   } catch (error) {
-    console.error('Ошибка при загрузке навыков:', error);
+    console.error('Error loading skills:', error)
+    localError.value = 'Fehler beim Laden der Skills.' // local message
+    message.value = 'Es ist ein Fehler beim Laden der Skills aufgetreten.' // global message
+    setTimeout(() => message.value = '', 5000)
+  } finally {
+    loading.value = false
   }
-};
+}
 
+// onMounted
 onMounted(() => {
-  fetchSkills();
-});
+  fetchSkills()
+})
 </script>
 
 
 <template>
   <main class="main-content skills-section" :style="{ backgroundImage: `url(${bgImage})` }">
+
+    <!-- Spinner -->
+    <LoadingSpinner :visible="loading" />
+
     <h1 class="about-title">Technical & Professional Skills</h1>
-    <div class="skills-content">
 
-      <!-- Tech Stack -->
-      <h2 class="section-title">Tech Stack</h2>
-      <div v-for="category in techStack" :key="category.id" class="category-block">
-        <h3 class="category-title">{{ category.name }}:
+    <!-- Local error or content -->
+    <div v-if="!loading">
+      <div v-if="localError" class="error-text">{{ localError }}</div>
+
+      <div v-else class="skills-content">
+        <!-- Tech Stack -->
+        <h2 class="section-title">Tech Stack</h2>
+        <div v-for="category in techStack" :key="category.id" class="category-block">
+          <h3 class="category-title">
+            {{ category.name }}:
             <span v-for="item in category.items" :key="item.id" class="tag">
-                {{ item.name }}
+              {{ item.name }}
             </span>
-        </h3>
-      </div>
+          </h3>
+        </div>
 
-      <!-- Technical Skills -->
-      <h2 class="section-title">Technical Skills</h2>
-      <div v-for="category in technicalSkills" :key="category.id" class="category-block">
-        <h3 class="category-title">{{ category.name }}</h3>
-        <ul class="skill-items">
-          <li v-for="item in category.items" :key="item.id">
-            {{ item.description }}
+        <!-- Technical Skills -->
+        <h2 class="section-title">Technical Skills</h2>
+        <div v-for="category in technicalSkills" :key="category.id" class="category-block">
+          <h3 class="category-title">{{ category.name }}</h3>
+          <ul class="skill-items">
+            <li v-for="item in category.items" :key="item.id">
+              {{ item.description }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Soft Skills -->
+        <h2 class="section-title">Soft Skills</h2>
+        <ul class="soft-skills">
+          <li v-for="skill in softSkills" :key="skill.id">
+            {{ skill.name }}
           </li>
         </ul>
       </div>
-
-      <!-- Soft Skills -->
-      <h2 class="section-title">Soft Skills</h2>
-      <ul class="soft-skills">
-        <li v-for="skill in softSkills" :key="skill.id">
-          {{ skill.name }}
-        </li>
-      </ul>
     </div>
+
     <footer>
       <div class="footer-content">
         &copy; 2026 Svitlana Kashkina. All rights reserved.

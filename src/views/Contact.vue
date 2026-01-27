@@ -1,62 +1,90 @@
 <script setup>
-    import { reactive, ref } from 'vue';
-    import axios from 'axios';
-    import bgImage from '../assets/background/about.png'
-    import githubIcon from '../assets/icons/github.png'
-    import linkedinIcon from '../assets/icons/linkedin.png'
+import { reactive, ref } from 'vue';
+import axios from 'axios';
+import bgImage from '../assets/background/about.png';
+import githubIcon from '../assets/icons/github.png';
+import linkedinIcon from '../assets/icons/linkedin.png';
+import LoadingSpinner from '../components/LoadingSpinner.vue';
+import { message } from '../components/ErrorBanner.vue'; // global Errorbanner
 
-    const form = reactive({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-      phone: '',
-      consent: false
-    });
+// Component states
+const form = reactive({
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
+  phone: '',
+  consent: false
+});
 
-    const successMessage = ref('');
-    const errorMessage = ref('');
+const successMessage = ref('');
+const localError = ref(''); // Local error
+const loading = ref(false);
 
-    // form submission method
-    const submitForm = async () => {
-      try {
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/contact`, form);
-        successMessage.value = 'Ihre Nachricht wurde erfolgreich gesendet!';
-        errorMessage.value = '';
+const homeData = ref({
+  linkedinUrl: "https://www.linkedin.com/in/svitlana-kashkina-12a0922b4/",
+  githubUrl: "https://github.com/SvitlanaKashkina"
+});
 
-        clearForm();
-      } catch (error) {
-        errorMessage.value = 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.';
-        successMessage.value = '';
-      }
-    };
+// Clearing the form
+function clearForm() {
+  form.name = '';
+  form.email = '';
+  form.subject = '';
+  form.message = '';
+  form.phone = '';
+  form.consent = false;
+}
 
-    function clearForm() {
-      form.name = '';
-      form.email = '';
-      form.subject = '';
-      form.message = '';
-      form.phone = '';
-      form.consent = false;
-    }
-    const homeData = ref({
-      linkedinUrl: "https://www.linkedin.com/in/svitlana-kashkina-12a0922b4/",
-      githubUrl: "https://github.com/SvitlanaKashkina"
-    });
+// Submitting a form
+const submitForm = async () => {
+  loading.value = true;
+  localError.value = ''; // local error reset
 
-    function openMap() {
-      const lat = 52.1507694;
-      const lng = 9.9511194;
-      // Open Google Maps in a new tab
-      window.open(`https://www.google.com/maps?q=${lat},${lng}`, "_blank");
-    }
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/contact`, form);
+    successMessage.value = 'Your message has been sent successfully!';
+    localError.value = '';
+    clearForm();
+  } catch (error) {
+    console.error('Error sending message:', error);
+
+    // Local error
+    localError.value = 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.';
+
+    // Global error
+    message.value = 'Es ist ein Fehler beim Senden Ihrer Nachricht aufgetreten.';
+    setTimeout(() => message.value = '', 5000);
+
+    successMessage.value = '';
+  } finally {
+    loading.value = false;
+  }
+};
+
+// Opening a map
+function openMap() {
+  try {
+    const lat = 52.1507694;
+    const lng = 9.9511194;
+    const newWindow = window.open(`https://www.google.com/maps?q=${lat},${lng}`, "_blank");
+    if (!newWindow) throw new Error('Popup blocked by browser');
+  } catch (error) {
+    console.error('Error opening map:', error);
+    localError.value = 'Fehler beim Öffnen der Karte.';
+    message.value = 'Es ist ein Fehler beim Öffnen der Karte aufgetreten.';
+    setTimeout(() => message.value = '', 5000);
+  }
+}
 </script>
 
 
 <template>
     <main class="main-content contact-section" :style="{ backgroundImage: `url(${bgImage})` }">
 
-      <div class="contact-container">
+      <LoadingSpinner :visible="loading" />
+
+      <div v-if="!loading" class="contact-container">
 
         <!-- Left form -->
         <div class="contact-form-container">
