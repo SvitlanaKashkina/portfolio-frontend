@@ -5,7 +5,6 @@ import bgImage from '../assets/background/about.png';
 import githubIcon from '../assets/icons/github.png';
 import linkedinIcon from '../assets/icons/linkedin.png';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
-import { message } from '../components/ErrorBanner.vue'; // global Errorbanner
 
 // Component states
 const form = reactive({
@@ -185,7 +184,7 @@ function openMap() {
 /* left block */
 .contact-form-container {
   flex: 2;
-  margin: 55px 80px 0 80px;
+  margin: 65px 80px 0 80px;
   padding: 5px 50px 30px 50px;
   background-color: #3F4958;
   border: 4px solid #272E37;
@@ -377,7 +376,7 @@ footer {
   align-items: center;
   justify-content: center;
   padding: 5px 0 0 0;
-  margin: 40px 0 0 0;
+  margin: 60px 0 0 0;
   box-sizing: border-box;
 
 }

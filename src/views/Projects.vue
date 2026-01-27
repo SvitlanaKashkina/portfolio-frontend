@@ -4,7 +4,6 @@ import axios from "axios";
 import bgImage from '../assets/background/about.png';
 import githubIcon from '../assets/icons/github.png';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
-import { message } from '../components/ErrorBanner.vue' // global Errorbanner
 
 // Component states
 const project = ref({});
@@ -317,9 +316,9 @@ onMounted(() => {
   width: 24%;
   display: flex;
   flex-direction: column;
-  margin: 70px 50px 30px 30px;
+  margin: 90px 50px 30px 30px;
   padding: 0;
-  gap: 100px;
+  gap: 130px;
 }
 .project-screenshot-img {
   width: 95%;

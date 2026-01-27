@@ -3,7 +3,6 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import bgImage from '../assets/background/about.png';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
-import { message } from '../components/ErrorBanner.vue' // global banner
 
 
 // Component states

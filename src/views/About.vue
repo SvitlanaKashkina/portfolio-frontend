@@ -7,7 +7,6 @@ import Tenis from '../assets/myFoto/tenis.png'
 import Icons from '../assets/myFoto/icons.png'
 import cvFile from '../assets/cv/Svitlana_Kashkina_CV.pdf'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
-import { message } from '../components/ErrorBanner.vue' // global Errorbanner
 
 // Component states
 const aboutSections = ref([])
@@ -131,7 +130,7 @@ function downloadCV() {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
+  background-attachment: fixed;
 }
 /* container for text and photos */
 .about-content {

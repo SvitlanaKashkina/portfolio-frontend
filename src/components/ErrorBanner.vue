@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-export const message = ref('')
+
+const message = ref('')
+
+defineExpose({ message })
 </script>
 
 <template>
@@ -20,5 +23,8 @@ export const message = ref('')
   padding: 10px 20px;
   border-radius: 5px;
   z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-weight: bold;
+  font-size: 14px;
 }
 </style>

@@ -1,18 +1,17 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import axios from 'axios'
-import Footer from '../components/Footer.vue'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import myVideo from '../assets/video/my-video.mp4'
 import githubIcon from '../assets/icons/github.png'
 import linkedinIcon from '../assets/icons/linkedin.png'
 import emailIcon from '../assets/icons/email.png'
-import { message } from '../components/ErrorBanner.vue' // global error
+import ErrorBanner from '../components/ErrorBanner.vue'
 
 const videoSrc = myVideo
 const heroVideo = ref(null)
 const loading = ref(true)
-const localError = ref('') // local error for div
+const localError = ref('')
 
 const homeData = ref({
   fullName: '',
@@ -20,24 +19,22 @@ const homeData = ref({
   roleType: '',
   shortBio: '',
   githubUrl: '',
-  linkedinUrl: ''
+  linkedinUrl: '',
+  email: ''
 })
 
 const apiUrl = import.meta.env.VITE_API_URL
 
-// Receiving data
 const fetchHomeData = async () => {
   loading.value = true
-  localError.value = '' // resetting the local error
+  localError.value = ''
 
   try {
     const response = await axios.get(`${apiUrl}/home`)
     homeData.value = response.data
-
   } catch (error) {
     console.error('Error loading Home data:', error)
-    localError.value = 'Fehler beim Laden der Home-Daten.' // local message
-    // global error via ErrorBanner
+    localError.value = 'Fehler beim Laden der Home-Daten.'
     message.value = 'Es ist ein Fehler aufgetreten beim Laden der Home-Seite.'
     setTimeout(() => message.value = '', 5000)
   } finally {
@@ -45,9 +42,12 @@ const fetchHomeData = async () => {
   }
 }
 
-onMounted(() => {
-  heroVideo.value.playbackRate = 0.3
-  fetchHomeData() // errors will be caught by a local try-catch and a global ErrorBanner
+onMounted(async () => {
+  await fetchHomeData()
+  await nextTick() // wait until the DOM is updated and the ref becomes available
+  if (heroVideo.value) {
+    heroVideo.value.playbackRate = 0.3
+  }
 })
 </script>
 
