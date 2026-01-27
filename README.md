@@ -26,8 +26,6 @@ It connects to a backend powered by **Java Spring Boot** and **PostgreSQL** to f
 
 ---
 
-## Getting Started
-
 ### Prerequisites
 
 - Node.js (v18+ recommended)
