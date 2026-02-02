@@ -2,10 +2,6 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import bgImage from '../assets/background/about.png'
-import Foto from '../assets/myFoto/foto.jpg'
-import Tenis from '../assets/myFoto/tenis.png'
-import Icons from '../assets/myFoto/icons.png'
-import cvFile from '../assets/cv/Svitlana_Kashkina_CV.pdf'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 // Component states
@@ -13,6 +9,8 @@ const aboutSections = ref([])
 const certificates = ref([])
 const loading = ref(true)
 const localError = ref('') // local error for data block
+const aboutPhotos = ref([]);
+const cvUrl = ref('')
 
 const apiUrl = import.meta.env.VITE_API_URL
 
@@ -20,6 +18,7 @@ const apiUrl = import.meta.env.VITE_API_URL
 const fetchAboutMe = async () => {
   loading.value = true
   localError.value = '' // local error reset
+
   try {
     const response = await axios.get(`${apiUrl}/about`)
     const data = response.data
@@ -29,6 +28,14 @@ const fetchAboutMe = async () => {
 
     const desiredOrder = ['about', 'experience', 'education', 'hobbies']
     aboutSections.value.sort((a, b) => desiredOrder.indexOf(a.sectionKey) - desiredOrder.indexOf(b.sectionKey))
+
+    // Filter photos for About Me page
+    aboutPhotos.value = (data.photos || []).filter(p => [31,32,33].includes(p.id))
+
+    // Set CV file URL (ID 35)
+    const cvFileObj = (data.photos || []).find(p => p.id === 35)
+    cvUrl.value = cvFileObj ? cvFileObj.imageUrl : ''
+
   } catch (error) {
     console.error('Error loading About Me:', error)
     localError.value = 'Fehler beim Laden der About-Daten.' // local message
@@ -39,24 +46,28 @@ const fetchAboutMe = async () => {
   }
 }
 
-// onMounted
 onMounted(() => {
   fetchAboutMe()
 })
 
 // Upload CV
 function downloadCV() {
-  try {
-    const link = document.createElement('a')
-    link.href = cvFile
-    link.download = 'Svitlana_Kashkina_CV.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  } catch (error) {
-    console.error('Failed to download CV: ', error)
-    message.value = 'CV konnte nicht heruntergeladen werden.'
-    setTimeout(() => message.value = '', 5000)
+  if (!cvUrl.value) return
+  const link = document.createElement('a')
+  link.href = cvUrl.value
+  link.download = 'Svitlana_Kashkina_CV.pdf'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
+// Function for photo classes
+const getPhotoClass = (index) => {
+  switch (index) {
+    case 0: return "myFoto";
+    case 1: return "icons";
+    case 2: return "tenis";
+    default: return "";
   }
 }
 </script>
@@ -100,16 +111,20 @@ function downloadCV() {
             </template>
 
             <!-- Download-CV -->
-            <div class="cv-container">
+            <div class="cv-container" v-if="cvUrl">
               <button @click="downloadCV" class="cv-button">📄 Download CV</button>
             </div>
           </div>
 
           <!-- Right block -->
-          <div class="about-photos debug-border">
-            <img :src="Foto" alt="Foto" class="myFoto" />
-            <img :src="Icons" alt="Foto" class="icons" />
-            <img :src="Tenis" alt="Foto" class="tenis" />
+          <div class="about-photos debug-border" v-if="aboutPhotos.length">
+            <img
+              v-for="(photo, index) in aboutPhotos"
+              :key="photo.id"
+              :src="photo.imageUrl"
+              :alt="photo.altText"
+              :class="getPhotoClass(index)"
+            />
           </div>
         </div>
       </div>

@@ -125,8 +125,9 @@ function openMap() {
           <div v-if="successMessage" class="success-message">
             {{ successMessage }}
           </div>
-          <div v-if="errorMessage" class="error-message">
-            {{ errorMessage }}
+
+          <div v-if="localError" class="error-message">
+            {{ localError }}
           </div>
         </div>
 
@@ -271,7 +272,7 @@ button:hover {
 .error-message {
   margin: 13px 0 0 20px;
   color: red;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

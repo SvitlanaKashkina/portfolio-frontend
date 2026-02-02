@@ -1,54 +1,56 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
-import axios from 'axios'
-import LoadingSpinner from '../components/LoadingSpinner.vue'
-import myVideo from '../assets/video/my-video.mp4'
-import githubIcon from '../assets/icons/github.png'
-import linkedinIcon from '../assets/icons/linkedin.png'
-import emailIcon from '../assets/icons/email.png'
-import ErrorBanner from '../components/ErrorBanner.vue'
+  import { ref, onMounted, watch } from 'vue'
+  import axios from 'axios'
+  import LoadingSpinner from '../components/LoadingSpinner.vue'
+  import githubIcon from '../assets/icons/github.png'
+  import linkedinIcon from '../assets/icons/linkedin.png'
+  import emailIcon from '../assets/icons/email.png'
 
-const videoSrc = myVideo
-const heroVideo = ref(null)
-const loading = ref(true)
-const localError = ref('')
+  const heroVideo = ref(null)
+  const loading = ref(true)
+  const localError = ref('')
+  const videoSrc = ref('')
 
-const homeData = ref({
-  fullName: '',
-  roleTitle: '',
-  roleType: '',
-  shortBio: '',
-  githubUrl: '',
-  linkedinUrl: '',
-  email: ''
-})
+  const homeData = ref({
+    fullName: '',
+    roleTitle: '',
+    roleType: '',
+    shortBio: '',
+    githubUrl: '',
+    linkedinUrl: '',
+    videos: []
+  })
 
-const apiUrl = import.meta.env.VITE_API_URL
+  const apiUrl = import.meta.env.VITE_API_URL
 
-const fetchHomeData = async () => {
-  loading.value = true
-  localError.value = ''
+  const onVideoReady = () => {
+    if (!heroVideo.value) return
 
-  try {
-    const response = await axios.get(`${apiUrl}/home`)
-    homeData.value = response.data
-  } catch (error) {
-    console.error('Error loading Home data:', error)
-    localError.value = 'Fehler beim Laden der Home-Daten.'
-    message.value = 'Es ist ein Fehler aufgetreten beim Laden der Home-Seite.'
-    setTimeout(() => message.value = '', 5000)
-  } finally {
-    loading.value = false
-  }
-}
-
-onMounted(async () => {
-  await fetchHomeData()
-  await nextTick() // wait until the DOM is updated and the ref becomes available
-  if (heroVideo.value) {
     heroVideo.value.playbackRate = 0.3
+    heroVideo.value.play().catch(() => {})
   }
-})
+
+  const fetchHomeData = async () => {
+    loading.value = true
+    localError.value = ''
+
+    try {
+      const response = await axios.get(`${apiUrl}/home`)
+      console.log(import.meta.env.VITE_API_URL);
+      homeData.value = response.data
+
+      videoSrc.value = homeData.value.videos?.[0]?.imageUrl || '';
+    } catch (error) {
+      console.error('Error loading Home data:', error)
+      localError.value = 'Es ist ein Fehler aufgetreten beim Laden der Home-Seite.'
+    } finally {
+      loading.value = false
+    }
+  }
+
+  onMounted(() => {
+    fetchHomeData()
+  })
 </script>
 
 
@@ -85,14 +87,16 @@ onMounted(async () => {
         </div>
 
         <!-- Right block -->
-        <div class="photo-block">
+        <div class="photo-block" v-if="videoSrc">
           <video
             ref="heroVideo"
+            v-if="videoSrc"
             :src="videoSrc"
             autoplay
             muted
             loop
             playsinline
+            @loadedmetadata="onVideoReady"
           ></video>
         </div>
       </div>

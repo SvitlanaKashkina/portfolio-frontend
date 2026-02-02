@@ -10,7 +10,16 @@ const project = ref({});
 const loading = ref(true);
 const localError = ref('');
 const apiUrl = import.meta.env.VITE_API_URL;
-const staticUrl = import.meta.env.VITE_STATIC_URL;
+
+// Array mit IDs der benötigten Fotos und Ausgabereihenfolge
+const desiredScreenshotIds = [27, 28, 29];
+
+const filteredScreenshots = computed(() => {
+  if (!project.value.screenshots) return [];
+  return project.value.screenshots
+    .filter(s => desiredScreenshotIds.includes(s.id))
+    .sort((a, b) => desiredScreenshotIds.indexOf(a.id) - desiredScreenshotIds.indexOf(b.id));
+});
 
 // Technology grouping
 const groupedTechnologies = computed(() => {
@@ -62,6 +71,7 @@ onMounted(() => {
   fetchProject();
 });
 </script>
+
 
 
 <template>
@@ -138,11 +148,11 @@ onMounted(() => {
         </div>
 
         <!-- Right block: screenshots -->
-        <div class="project-screenshots" v-if="project.screenshots && project.screenshots.length">
-          <img v-for="screenshot in project.screenshots" :key="screenshot.id"
-               :src="staticUrl + screenshot.imageUrl"
-               :alt="screenshot.altText"
-               class="project-screenshot-img" />
+        <div class="project-screenshots" v-if="filteredScreenshots.length">
+          <img v-for="screenshot in filteredScreenshots" :key="screenshot.id"
+              :src="screenshot.imageUrl"
+              :alt="screenshot.altText"
+              class="project-screenshot-img" />
         </div>
       </div>
     </div>
