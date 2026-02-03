@@ -11,6 +11,11 @@ RUN npm install
 # Copying the entire project
 COPY . .
 
+ARG VITE_API_URL
+
+# Passing ARG to ENV
+ENV VITE_API_URL=$VITE_API_URL
+
 # Building a project for production
 RUN npm run build
 
