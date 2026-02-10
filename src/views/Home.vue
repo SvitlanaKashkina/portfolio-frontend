@@ -22,6 +22,8 @@
   })
 
   const apiUrl = import.meta.env.VITE_API_URL
+  console.log('API URL:', apiUrl)
+  console.log(import.meta.env.VITE_API_URL)
 
   const onVideoReady = () => {
     if (!heroVideo.value) return
@@ -31,13 +33,19 @@
   }
 
   const fetchHomeData = async () => {
+    console.log('FETCH HOME CALLED')
+    console.log('API URL:', apiUrl)
     loading.value = true
     localError.value = ''
 
     try {
       const response = await axios.get(`${apiUrl}/home`)
-      console.log(import.meta.env.VITE_API_URL);
+      console.log('RAW response:', response)
+      console.log('Response data:', response.data)
+      console.log('Type of data:', typeof response.data)
+
       homeData.value = response.data
+      console.log('homeData after assign:', homeData.value)
 
       videoSrc.value = homeData.value.videos?.[0]?.imageUrl || '';
     } catch (error) {
@@ -49,6 +57,7 @@
   }
 
   onMounted(() => {
+    console.log('COMPONENT MOUNTED');
     fetchHomeData()
   })
 </script>

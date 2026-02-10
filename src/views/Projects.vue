@@ -42,6 +42,7 @@ const architectureList = computed(() => {
 
 // Retrieving Project Data
 const fetchProject = async () => {
+  console.log('FETCH PROJECT CALLED')
   loading.value = true;
   localError.value = ''; // local error reset
 
@@ -51,16 +52,12 @@ const fetchProject = async () => {
       project.value = response.data[0];
       console.log("Project screenshots:", project.value.screenshots);
     } else {
-      console.warn("No project data received");
-      localError.value = 'Keine Projektdaten erhalten.';
-      message.value = 'Fehler beim Laden der Projektinformationen.';
-      setTimeout(() => message.value = '', 5000);
+      console.warn("No project data received")
+      localError.value = 'Keine Projektdaten erhalten.'
     }
   } catch (error) {
-    console.error("Error fetching project data:", error);
-    localError.value = 'Fehler beim Laden der Projektdaten.';
-    message.value = 'Es ist ein Fehler beim Laden der Projektinformationen aufgetreten.';
-    setTimeout(() => message.value = '', 5000);
+     console.error("Error fetching project data:", error)
+     localError.value = 'Fehler beim Laden der Projektdaten.'
   } finally {
     loading.value = false;
   }
@@ -68,6 +65,7 @@ const fetchProject = async () => {
 
 // onMounted
 onMounted(() => {
+  console.log('COMPONENT MOUNTED');
   fetchProject();
 });
 </script>

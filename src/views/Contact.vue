@@ -37,6 +37,7 @@ function clearForm() {
 
 // Submitting a form
 const submitForm = async () => {
+  console.log('SUBMIT FORM CALLED')
   loading.value = true;
   localError.value = ''; // local error reset
 
@@ -50,10 +51,6 @@ const submitForm = async () => {
 
     // Local error
     localError.value = 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.';
-
-    // Global error
-    message.value = 'Es ist ein Fehler beim Senden Ihrer Nachricht aufgetreten.';
-    setTimeout(() => message.value = '', 5000);
 
     successMessage.value = '';
   } finally {
@@ -69,10 +66,8 @@ function openMap() {
     const newWindow = window.open(`https://www.google.com/maps?q=${lat},${lng}`, "_blank");
     if (!newWindow) throw new Error('Popup blocked by browser');
   } catch (error) {
-    console.error('Error opening map:', error);
-    localError.value = 'Fehler beim Öffnen der Karte.';
-    message.value = 'Es ist ein Fehler beim Öffnen der Karte aufgetreten.';
-    setTimeout(() => message.value = '', 5000);
+    console.error('Error opening map:', error)
+    localError.value = 'Fehler beim Öffnen der Karte.'
   }
 }
 </script>

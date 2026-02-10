@@ -1,34 +1,99 @@
-# Portfolio Frontend
+# Portfolio Web Application (Full-Stack)
 
-This is the **frontend of my personal portfolio website**, built with **Vue 3 and JavaScript**.
-It connects to a backend powered by **Java Spring Boot** and **PostgreSQL** to fetch and display projects and handle contact form messages.
+This is my **personal portfolio website**, consisting of **frontend (Vue.js)** and **backend (Java Spring Boot)** components.
+It demonstrates my skills as a **Full-Stack Developer**, including building REST APIs, integrating with databases, handling frontend interactivity, and deploying applications.
+You can view the live version here: [https://www.svitlana-kashkina.com](https://www.svitlana-kashkina.com)
 
 ---
 
 ## Features
 
-- Home page with short bio
-- About page with detailed information
-- Projects page fetching project data from backend
-- Contact form sending messages to backend
-- Responsive design for desktop and mobile
+### Backend
+
+- REST API for managing portfolio projects
+- Contact form messages saved in PostgreSQL
+- Structured architecture:
+  - `controller/` — REST endpoints
+  - `service/` — business logic
+  - `repository/` — database access (PostgreSQL integration)
+  - `entity/` — JPA entities
+  - `dto/` — data transfer objects
+  - `exception/` — custom exceptions
+  - `config/` — configuration (includes database, Redis, Kafka settings)
+  - `redis/` — Redis configuration and caching
+  - `kafka/` — Kafka producers and consumers
+  - `docker/` — Dockerfile and Docker Compose YAML for containerization
+- Global exception handling
+- Logging setup
+- Email notifications using Spring Mail
+- Caching and messaging: Redis & Kafka
+- File storage with Amazon S3 (AWS)
+- Docker support for containerization (Dockerfile & Docker Compose)
+- Unit testing with JUnit
+
+### Frontend
+
+- Responsive UI using **Vue.js**
+- JavaScript (ES6+) for dynamic functionality
+- Axios for API communication with backend
+- Global exception handling and error messages
+- Loading spinners for asynchronous operations
+- Component-based architecture for reusable UI elements
+- Routing using Vue Router
+- Form validations and interactive portfolio components
 
 ---
 
 ## Technologies Used
 
-- Vue 3
-- JavaScript
-- Vite (build tool)
-- Vue Router (for navigation between pages)
-- Axios (for HTTP requests to backend)
-- CSS / SCSS (for styling)
+### Backend
+
+- Java 17
+- Spring Boot 3.x
+- Hibernate / Spring Data JPA
+- PostgreSQL
+- Lombok
+- Spring Mail
+- Redis
+- Kafka
+- Docker
+- Maven
+- Amazon S3 (AWS)
+- IntelliJ IDEA
+
+### Frontend
+
+- JavaScript (ES6+)
+- Vue.js 3
+- Vue Router
+- Axios
+- HTML / CSS
+- Global exception handling
+- Spinner component
+- Visual Studio Code
+
+### Tools & Platforms
+
+- GitHub (version control)
+- Maven (backend build tool)
+- Docker (containerization)
+- PostgreSQL (database)
+- AWS S3 (cloud storage)
+- IntelliJ IDEA, Visual Studio Code
 
 ---
 
-## Getting Started
+## Prerequisites
 
-### Prerequisites
+- Java 17
+- Maven
+- PostgreSQL
+- Node.js & npm (for frontend)
 
-- Node.js (v18+ recommended)
-- npm or yarn
+---
+
+## Links
+
+- **Frontend Repository:** [GitHub Frontend](https://github.com/SvitlanaKashkina/portfolio-frontend-vue-javascript)
+- **Backend Repository:** [GitHub Backend](https://github.com/SvitlanaKashkina/portfolio-backend-java-springboot)
+- **Live Demo / Portfolio Website:** [https://www.svitlana-kashkina.com](https://www.svitlana-kashkina.com)

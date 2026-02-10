@@ -4,13 +4,12 @@ import axios from 'axios'
 import { RouterLink } from 'vue-router'
 
 const homeContent = ref(null)
+const apiUrl = import.meta.env.VITE_API_URL
 
 // request to backend
 const fetchHomeContent = async () => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/home`
-    )
+    const response = await axios.get(`${apiUrl}/home`)
     homeContent.value = response.data
     console.log('Navbar home content:', homeContent.value)
   } catch (error) {

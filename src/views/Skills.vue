@@ -16,6 +16,7 @@ const apiUrl = import.meta.env.VITE_API_URL
 
 // Receiving data
 const fetchSkills = async () => {
+  console.log('FETCH SKILLS CALLED')
   loading.value = true
   localError.value = '' // local error reset
   try {
@@ -25,9 +26,7 @@ const fetchSkills = async () => {
     softSkills.value = response.data.softSkills;
   } catch (error) {
     console.error('Error loading skills:', error)
-    localError.value = 'Fehler beim Laden der Skills.' // local message
-    message.value = 'Es ist ein Fehler beim Laden der Skills aufgetreten.' // global message
-    setTimeout(() => message.value = '', 5000)
+    localError.value = 'Fehler beim Laden der Skills.'
   } finally {
     loading.value = false
   }
@@ -35,6 +34,7 @@ const fetchSkills = async () => {
 
 // onMounted
 onMounted(() => {
+  console.log('COMPONENT MOUNTED');
   fetchSkills()
 })
 </script>

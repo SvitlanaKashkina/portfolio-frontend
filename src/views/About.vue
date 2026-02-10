@@ -13,15 +13,22 @@ const aboutPhotos = ref([]);
 const cvUrl = ref('')
 
 const apiUrl = import.meta.env.VITE_API_URL
+console.log('API URL:', apiUrl)
+console.log(import.meta.env.VITE_API_URL)
 
 // Receiving data
 const fetchAboutMe = async () => {
+  console.log('FETCH ABOUT CALLED')
   loading.value = true
   localError.value = '' // local error reset
 
   try {
     const response = await axios.get(`${apiUrl}/about`)
     const data = response.data
+
+    console.log('RAW response:', response)
+    console.log('Response data:', response.data)
+    console.log('Type of data:', typeof response.data)
 
     aboutSections.value = data.sections || []
     certificates.value = data.certificates || []
@@ -38,15 +45,14 @@ const fetchAboutMe = async () => {
 
   } catch (error) {
     console.error('Error loading About Me:', error)
-    localError.value = 'Fehler beim Laden der About-Daten.' // local message
-    message.value = 'Es ist ein Fehler beim Laden der About-Seite aufgetreten.' // global message
-    setTimeout(() => message.value = '', 5000)
+    localError.value = 'Fehler beim Laden der About-Daten.'
   } finally {
     loading.value = false
   }
 }
 
 onMounted(() => {
+  console.log('COMPONENT MOUNTED');
   fetchAboutMe()
 })
 
@@ -141,11 +147,12 @@ const getPhotoClass = (index) => {
 
 <style>
 .main-content.about-section {
+  min-height: calc(100vh - 80px);
   padding: 40px 20px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  justify-content: flex-end;
 }
 /* container for text and photos */
 .about-content {
