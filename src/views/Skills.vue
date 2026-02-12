@@ -95,88 +95,98 @@ onMounted(() => {
 
 
 <style>
+/* ===== SKIllS PAGE ===== */
 .main-content.skills-section {
-  padding: 40px 20px;
-  min-height: 100vh;
+  padding: clamp(20px, 3vw, 40px);
+  min-height: 100dvh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+/* PAGE TITLE */
 .about-title {
   padding: 0;
-  margin: 40px 0 0 0;
+  margin: clamp(20px, 5vw, 40px) 0 0 0;
   text-align: center;
   color: #1FE7FF;
-  font-size: 55px;
+  font-size: clamp(28px, 6vw, 55px);
   font-weight: 800;
   font-family: Arial, sans-serif;
   -webkit-text-stroke: 1px rgb(8, 8, 8);
-  text-shadow: 5px 5px 5px rgba(5,5,5,5);
+  text-shadow: 5px 5px 5px rgba(5,5,5,0.5);
 }
+/* CONTENT BLOCK */
 .skills-content {
   background-color: #272E37;
   border: 4px solid #1e242b;
-  border-radius: 3%;
-  padding: 15px 0 10px 50px;
-  margin: 15px 370px 30px 370px;
+  border-radius: clamp(10px, 2vw, 30px);
+  padding: clamp(10px, 2vw, 15px) clamp(5px, 0.5vw, 10px) clamp(10px, 2vw, 15px) clamp(10px, 2vw, 30px);
+  margin: clamp(10px, 2vw, 15px) clamp(5px, 20vw, 550px);
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
+/* SECTION TITLE */
 .section-title {
   text-align: center;
-  font-size: 35px;
-  margin: 10px 0 5px 0;
+  font-size: clamp(20px, 5vw, 35px);
+  margin: clamp(5px, 1vw, 10px) 0 clamp(2px, 1vw, 5px) 0;
   font-weight: bold;
   color: #0899ec;
   -webkit-text-stroke: 1px rgb(8, 8, 8);
-  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
+  text-shadow: 5px 5px 5px rgba(5,5,5,0.5);
 }
+/* CATEGORY BLOCK */
 .category-block {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0 25px 0 5px;
-  padding: 0 0 0 10px;
+  margin: 0 clamp(2px, 0.5vw, 5px) 0 clamp(2px, 1vw, 5px);
+  padding: 0;
   color: #1FE7FF;
+  line-height: 1;
 }
 .category-title {
-  font-size: 25px;
+  font-size: clamp(16px, 2.5vw, 22px);
   font-weight: 600;
   -webkit-text-stroke: 0.5px rgb(65, 64, 64);
   text-shadow: 3px 3px 3px rgba(3,3,3,0.7);
-  margin: 5px 0 2px 0;
-  padding: 0px 10px 0 0;
+  margin: clamp(2px, 0.5vw, 5px) 0 clamp(1px, 0.5vw, 2px) 0;
+  padding: 0 clamp(5px, 1vw, 10px) 0 0;
 }
 .category-title .span {
-  margin: 0 10px 10px 0;
-  font-size: 23px;
+  margin: 0 clamp(2px, 1vw, 10px) clamp(2px, 1vw, 10px) 0;
+  font-size: clamp(14px, 2.5vw, 23px);
 }
+/* TAGS */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: clamp(5px, 1vw, 8px);
   width: 100%;
 }
 .tag {
-  padding: 5px 12px;
-  border-radius: 15px;
-  font-size: 22px;
+  padding: clamp(3px, 0.5vw, 5px) clamp(8px, 1.5vw, 12px);
+  border-radius: clamp(10px, 2vw, 15px);
+  font-size: clamp(14px, 2vw, 22px);
   color: #f1f6f7;
   -webkit-text-stroke: 0.5px rgb(65, 64, 64);
   text-shadow: 3px 3px 3px rgba(3,3,3,0.7);
 }
-.skill-items, .soft-skills {
+/* LISTS */
+.skill-items,
+.soft-skills {
   list-style: disc;
-  margin: 8px 0 20px 8px;
-  color: #ffffFF;
-  font-size: 22px;
+  margin: clamp(5px, 1vw, 8px) 0 clamp(10px, 1vw, 10px) clamp(5px, 1vw, 8px);
+  color: #ffffff;
+  font-size: clamp(14px, 2vw, 22px);
   line-height: 1.5;
 }
+/* FOOTER */
 footer {
-  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -186,9 +196,156 @@ footer {
 .footer-content {
   display: flex;
   justify-content: center;
-  gap: clamp(40px, 8vw, 100px);
-  font-size: 0.8rem;
+  gap: clamp(20px, 4vw, 60px);
+  font-size: clamp(10px, 1.2vw, 14px);
   margin: 0;
   padding: 0;
+}
+/* ========================= */
+/* MEDIA QUERIES FOR TABLETS AND PHONES */
+@media (max-width: 1280px) {
+  /* ===== SKIllS PAGE ===== */
+  .main-content.skills-section {
+    padding: clamp(10px, 2vw, 20px) 0 clamp(10px, 2vw, 20px) 0;
+  }
+  /* PAGE TITLE */
+  .about-title {
+    margin: clamp(10px, 3vw, 30px) 0 0 0;
+    text-align: center;
+    color: #1FE7FF;
+    font-size: clamp(18px, 4vw, 35px);
+  }
+  /* CONTENT BLOCK */
+  .skills-content {
+    padding: clamp(5px, 0.5vw, 5px) clamp(5px, 6vw, 60px);
+    margin: clamp(5px, 0.5vw, 5px) clamp(5px, 20vw, 500px);
+  }
+  /* SECTION TITLE */
+  .section-title {
+    font-size: clamp(10px, 3vw, 25px);
+    margin: clamp(2px, 0.5vw, 5px) 0 clamp(2px, 1vw, 5px) 0;
+  }
+  /* CATEGORY BLOCK */
+  .category-block {
+    margin: 0 clamp(2px, 0.5vw, 5px) 0 clamp(2px, 1vw, 5px);
+  }
+  .category-title {
+    font-size: clamp(10px, 2vw, 18px);
+    margin: clamp(2px, 0.5vw, 5px) 0 clamp(1px, 0.5vw, 2px) 0;
+    padding: 0 clamp(5px, 1vw, 10px) 0 0;
+  }
+  .category-title .span {
+    margin: 0 clamp(2px, 1vw, 10px) clamp(2px, 1vw, 10px) 0;
+    font-size: clamp(10px, 2vw, 18px);
+  }
+  .tag {
+    padding: clamp(3px, 0.5vw, 5px) clamp(8px, 1.5vw, 12px);
+    border-radius: clamp(10px, 2vw, 15px);
+    font-size: clamp(10px, 1.3vw, 20px);
+  }
+  /* LISTS */
+  .skill-items,
+  .soft-skills {
+    margin: clamp(5px, 1vw, 8px) 0 clamp(10px, 1vw, 10px) clamp(5px, 1vw, 8px);
+    font-size: clamp(10px, 1.5vw, 18px);
+    line-height: 1.3;
+  }
+  /* FOOTER */
+  .footer-content {
+    gap: clamp(20px, 3vw, 40px);
+    font-size: clamp(10px, 1.2vw, 14px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-content.skills-section {
+    padding: clamp(10px, 5vw, 50px) 0 clamp(10px, 2vw, 20px) 0;
+  }
+  .skills-content {
+    margin: clamp(10px, 5vw, 15px) clamp(10px, 15vw, 150px);
+  }
+  .category-title {
+    font-size: clamp(14px, 3vw, 22px);
+  }
+  .tag {
+    font-size: clamp(12px, 2.5vw, 20px);
+    padding: clamp(2px, 1vw, 4px) clamp(6px, 2vw, 10px);
+  }
+  .skill-items,
+  .soft-skills {
+    font-size: clamp(12px, 2.5vw, 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-content {
+    margin: clamp(8px, 4vw, 12px) clamp(8px, 5vw, 42px);
+    padding: clamp(5px, 3vw, 12px);
+  }
+  .about-title {
+    font-size: clamp(20px, 5vw, 40px);
+  }
+  .section-title {
+    font-size: clamp(18px, 4vw, 30px);
+  }
+  .category-title {
+    font-size: clamp(14px, 3.5vw, 20px);
+  }
+  .tag {
+    font-size: clamp(12px, 3vw, 18px);
+  }
+  .skill-items,
+  .soft-skills {
+    font-size: clamp(12px, 3vw, 18px);
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-content {
+    margin: clamp(8px, 4vw, 12px) clamp(8px, 5vw, 42px);
+    padding: clamp(3px, 2vw, 8px);
+  }
+  .about-title {
+    margin: clamp(8px, 8vw, 82px) 0 0 0;
+    font-size: clamp(16px, 6vw, 28px);
+  }
+  .section-title {
+    font-size: clamp(14px, 5vw, 25px);
+  }
+  .category-title {
+    font-size: clamp(12px, 4vw, 20px);
+  }
+  .tag {
+    font-size: clamp(10px, 3.9vw, 15px);
+    padding: clamp(2px, 1vw, 4px);
+  }
+  .skill-items,
+  .soft-skills {
+    font-size: clamp(10px, 4vw, 16px);
+  }
+}
+@media (max-width: 390px) {
+  .skills-content {
+    margin: clamp(8px, 4vw, 12px) clamp(8px, 5vw, 42px);
+    padding: clamp(3px, 2vw, 8px);
+  }
+  .about-title {
+    margin: clamp(8px, 8vw, 82px) 0 0 0;
+    font-size: clamp(16px, 6vw, 28px);
+  }
+  .section-title {
+    font-size: clamp(14px, 5vw, 25px);
+  }
+  .category-title {
+    font-size: clamp(12px, 4vw, 20px);
+  }
+  .tag {
+    font-size: clamp(10px, 3.8vw, 13px);
+    padding: clamp(2px, 1vw, 4px);
+  }
+  .skill-items,
+  .soft-skills {
+    font-size: clamp(10px, 4vw, 16px);
+  }
 }
 </style>

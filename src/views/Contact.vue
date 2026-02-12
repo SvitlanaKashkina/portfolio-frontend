@@ -163,225 +163,868 @@ function openMap() {
 
 
 <style scoped>
+/* ============================= */
+/* MAIN SECTION */
 .main-content.contact-section {
-  min-height: calc(100vh - 80px);
-  padding: 40px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(100px, 100vw, 107px) 0 clamp(10px, 5vw, 45px) 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  justify-content: flex-end;
 }
-/* Container for right and left blocks */
+/* ============================= */
+/* CONTAINER */
 .contact-container {
   display: flex;
-  margin: 25px 300px 0 300px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  gap: clamp(20px, 5vw, 60px);
 }
-/* left block */
+/* ============================= */
+/* LEFT BLOCK */
 .contact-form-container {
-  flex: 2;
-  margin: 65px 80px 0 80px;
-  padding: 5px 50px 30px 50px;
+  flex: 1 1 500px;
+  max-width: 630px;
+  width: 100%;
+  padding: clamp(2px, 0.5vw, 5px) clamp(5px, 4vw, 40px);
+  margin-top: clamp(20px, 4vw, 45px);
   background-color: #3F4958;
-  border: 4px solid #272E37;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: clamp(2px, 0.3vw, 4px) solid #272E37;
+  border-radius: clamp(14px, 2vw, 22px);
+  box-shadow: 0 1.5vw 3vw rgba(0, 0, 0, 0.25);
   color: #1FE7FF;
+  box-sizing: border-box;
 }
+/* ============================= */
+/* TITLE */
 h2 {
-  margin: 10px 0 10px 0 ;
+  margin: clamp(5px, 1vw, 10px) 0 0 0;
   text-align: center;
-  font-size: 40px;
+  font-size: clamp(24px, 4vw, 42px);
   color: #1FE7FF;
   -webkit-text-stroke: 1px rgb(8, 8, 8);
-  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
+  text-shadow: 4px 4px 8px rgba(5,5,5,0.6);
 }
+/* ============================= */
+/* FORM GROUP */
 .form-group {
-  margin: 13px 0 6px 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  gap: clamp(1px, 0.3vw, 3px);
+  margin-top: clamp(3px, 1vw, 10px);
+  font-size: clamp(14px, 1.5vw, 20px);
   color: #1FE7FF;
-  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
+  text-shadow: 2px 2px 5px rgba(5,5,5,0.5);
 }
-
-input[type="text"]{
-  border: 1px solid rgb(51, 51, 51);
-  padding: 0.5rem;
-  margin: 5px 0 0 0;
-  border-radius: 0.30rem;
-  border: 2px solid #272E37;
-  font-size: 15px;
-  color: #080808;
-}
-input[type="email"] {
-  border: 1px solid rgb(51, 51, 51);
-  padding: 0.5rem;
-  border-radius: 0.30rem;
-  border: 2px solid #272E37;
-  font-size: 15px;
-  color: #080808;
-}
+/* ============================= */
+/* INPUTS */
+input[type="text"],
+input[type="email"],
 textarea {
-  padding: 0.5rem;
-  margin: 5px 0 0 0;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  height: 100px;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  resize: vertical;
-}
-.consent {
-  flex-direction: row;
-  align-items: center;
-  font-size: 15px;
-  margin: 18px 0 20px 0;
-}
-button {
   width: 100%;
-  padding: 0.7rem;
+  padding: clamp(3px, 0.5vw, 8px);
+  margin: 0;
+  border-radius: clamp(6px, 0.8vw, 10px);
+  border: clamp(1px, 0.2vw, 3px) solid #272E37;
+  font-size: clamp(14px, 1.2vw, 17px);
+  color: #080808;
+  box-sizing: border-box;
+}
+/* TEXTAREA */
+textarea {
+  min-height: clamp(80px, 12vh, 150px);
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+/* ============================= */
+/* CONSENT */
+.consent {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 12px);
+  font-size: clamp(13px, 1.2vw, 15px);
+  flex-direction: row;
+}
+/* ============================= */
+/* BUTTON */
+button {
+  width: 70%;
+  padding: clamp(5px, 1.3vw, 13px);
+  margin: clamp(5px, 1.5vw, 15px) clamp(5px, 8vw, 80px);
   background-color: #007bff;
   color: white;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 22px);
   font-weight: 600;
   border: none;
-  border-radius: 4px;
+  border-radius: clamp(8px, 1vw, 14px);
   cursor: pointer;
+  transition: 0.3s ease;
 }
 button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
+}
+/* ============================= */
+/* SUCCESS & ERROR */
+.success-message,
+.error-message {
+  margin: clamp(5px, 1vw, 10px) clamp(12px, 5vw, 60px);
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 600;
+  line-height: 1.3;
 }
 .success-message {
-  margin: 13px 0 0 20px;
-  color: green;
-  font-size: 20px;
-  font-weight: 600;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  line-height: 1.2;
-  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #00ff99;
 }
 .error-message {
-  margin: 13px 0 0 20px;
-  color: red;
-  font-size: 20px;
-  font-weight: 600;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  line-height: 1.2;
-  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #ff4d4d;
 }
- /* Right block*/
+/* ========================= */
+/* RIGHT BLOCK */
+/* ========================= */
 .contact-info-block {
   display: flex;
   flex-direction: column;
-  margin: 110px 50px 0 80px;
-  padding: 20px;
+  gap: clamp(15px, 3vw, 30px);
+  margin: clamp(20px, 5vw, 70px) 0 clamp(20px, 5vw, 50px) clamp(20px, 5vw, 60px);
+  padding: clamp(15px, 3vw, 25px);
   background-color: #3F4958;
-  border: 4px solid #272E37;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: clamp(2px, 0.4vw, 4px) solid #272E37;
+  border-radius: clamp(12px, 2vw, 20px);
+  box-shadow: 0 0 clamp(10px, 2vw, 20px) rgba(0, 0, 0, 0.2);
   color: #1FE7FF;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  max-width: clamp(280px, 35vw, 420px);
+  box-sizing: border-box;
 }
+/* ========================= */
+/* LOCATION CARD */
+/* ========================= */
 .location-card {
-  flex: 1;
-  margin: 30px;
-  padding: 10px 20px 0 20px;
-  border-radius: 12px;
+  padding: clamp(10px, 2vw, 20px);
+  border-radius: clamp(10px, 2vw, 16px);
   border: 2px solid #868788;
   background: #606e81;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
-  color: #1FE7FF;
-  cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
   user-select: none;
 }
 .location-card:hover {
   background: #cfd4da;
   transform: translateY(-3px);
 }
+/* ========================= */
+/* TEXT ELEMENTS */
+/* ========================= */
 .icon {
-  font-size: 30px;
-  margin: 8px 0 8px 0;
+  font-size: clamp(20px, 3vw, 30px);
+  margin: clamp(5px, 1vw, 10px) 0;
 }
 .title {
-  font-size: 40px;
+  font-size: clamp(20px, 3.5vw, 40px);
   font-weight: 700;
-  margin: 4px 0 4px 0;
-  font-weight: 700;
-  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
+  margin: clamp(5px, 1vw, 10px) 0;
+  text-shadow: 4px 4px 6px rgba(5,5,5,0.6);
 }
 .coordinates {
-  font-size: 18px;
+  font-size: clamp(14px, 1.5vw, 18px);
+  margin-top: clamp(10px, 2vw, 20px);
   color: #0c0c0c;
-  margin: 20px 0 0 0;
-  text-shadow: 6px 6px 6px rgba(3,3,3,0.7);
+  text-shadow: 3px 3px 6px rgba(3,3,3,0.6);
 }
 .city {
-  font-size: 35px;
+  font-size: clamp(18px, 3vw, 35px);
   font-weight: 500;
-  color: #1FE7FF;
-  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
-  margin: 20px 0 20px 0;
+  margin: clamp(10px, 2vw, 20px) 0;
+  text-shadow: 4px 4px 6px rgba(5,5,5,0.6);
 }
+/* ======================== */
+/* CONNECT BLOCK */
+/* ========================= */
 .connect-block {
-  width: 250px;
-  margin: 20px 30px 20px 30px;
-  padding: 10px 20px 20px 20px;
-  border-radius: 12px;
+  width: 85%;
+  padding: clamp(15px, 1.5vw, 15px) clamp(15px, 2vw, 25px) clamp(15px, 3vw, 35px) clamp(15px, 2vw, 25px);
+  border-radius: clamp(10px, 2vw, 16px);
   border: 2px solid #868788;
   background: #606e81;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
-  cursor: pointer;
-  transition: background 0.3s;
-  user-select: none;
+  transition: all 0.3s ease;
 }
 .connect-block p {
-  font-size: 40px;
+  font-size: clamp(18px, 3vw, 40px);
   font-weight: 700;
+  margin-bottom: clamp(15px, 3vw, 30px);
   color: #1FE7FF;
-  text-shadow: 5px 5px 5px rgba(5,5,5,0.7);
-  -webkit-text-stroke: 1px rgb(8, 8, 8);
-  margin: 10px 0 30px 0;
-  padding: 0;
+  text-shadow: 4px 4px 6px rgba(5,5,5,0.6);
 }
+/* ========================= */
+/* SOCIAL LINKS */
+/* ========================= */
 .social-links {
   display: flex;
-  gap: 3rem;
-  justify-content: flex-start;
-   padding: 0 0 0 35px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(15px, 5vw, 60px);
 }
 .social-links img {
-  width: 70px;
-  height: 70px;
+  width: clamp(30px, 6vw, 70px);
+  height: auto;
   transition: transform 0.2s;
 }
 .social-links img:hover {
   transform: scale(1.1);
 }
-footer {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 0 0 0;
-  margin: 60px 0 0 0;
-  box-sizing: border-box;
-
-}
+/* ========================= */
+/* FOOTER */
+/* ========================= */
 .footer-content {
   display: flex;
   justify-content: center;
-  gap: clamp(40px, 8vw, 100px);
-  font-size: 0.8rem;
-  margin: 0;
-  padding: 0;
+  font-size: clamp(12px, 1.2vw, 14px);
+  margin-top: auto;
+  padding: clamp(5px, 1vw, 10px) 0;
+  text-align: center;
+}
+/* ============================= */
+/* 📱 MOBILE STACK */
+/* 📱 Tablet */
+@media (max-width: 1280px) {
+  .main-content.contact-section {
+    padding: clamp(60px, 80vw, 80px) 0 clamp(10px, 3vw, 35px) 0;
+  }
+  /* ============================= */
+  /* CONTAINER */
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    gap: clamp(20px, 3vw, 30px);
+  }
+  /* ============================= */
+  /* LEFT BLOCK */
+  .contact-form-container {
+    max-width: 530px;
+    padding: clamp(2px, 0.5vw, 5px) clamp(5px, 4vw, 40px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  /* ============================= */
+  /* TITLE */
+  h2 {
+    margin: clamp(5px, 1vw, 10px) 0 0 0;
+    font-size: clamp(14px, 3vw, 32px);
+  }
+  /* ============================= */
+  /* FORM GROUP */
+  .form-group {
+    gap: clamp(1px, 0.3vw, 3px);
+    margin-top: clamp(3px, 1vw, 10px);
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+  /* ============================= */
+  /* INPUTS */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: clamp(3px, 0.5vw, 8px);
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  /* TEXTAREA */
+  textarea {
+    min-height: clamp(80px, 12vh, 150px);
+  }
+  /* ============================= */
+  /* CONSENT */
+  .consent {
+    font-size: clamp(13px, 1.2vw, 15px);
+  }
+  /* ============================= */
+  /* BUTTON */
+  button {
+    width: 70%;
+    padding: clamp(5px, 1.3vw, 13px);
+    margin: clamp(5px, 1.5vw, 15px) clamp(5px, 8vw, 80px);
+    font-size: clamp(16px, 2vw, 22px);
+  }
+  /* ============================= */
+  /* SUCCESS & ERROR */
+  .success-message,
+  .error-message {
+    margin: clamp(5px, 1vw, 10px) clamp(12px, 5vw, 60px);
+    font-size: clamp(14px, 1.5vw, 20px);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .success-message {
+    color: #00ff99;
+  }
+  .error-message {
+    color: #ff4d4d;
+  }
+  /* ========================= */
+  /* RIGHT BLOCK */
+  /* ========================= */
+  .contact-info-block {
+    gap: clamp(15px, 3vw, 30px);
+    margin: clamp(20px, 1.8vw, 30px) 0 clamp(20px, 3vw, 30px) clamp(20px, 5vw, 60px);
+    padding: clamp(15px, 3vw, 25px);
+    width: 70%;
+  }
+  /* ========================= */
+  /* LOCATION CARD */
+  /* ========================= */
+  .location-card {
+    padding: clamp(10px, 2vw, 20px);
+  }
+  /* ========================= */
+  /* TEXT ELEMENTS */
+  /* ========================= */
+  .icon {
+    font-size: clamp(20px, 3vw, 30px);
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .title {
+    font-size: clamp(20px, 3.5vw, 40px);
+    font-weight: 700;
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .coordinates {
+    font-size: clamp(14px, 1.5vw, 18px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  .city {
+    font-size: clamp(18px, 3vw, 35px);
+    margin: clamp(10px, 2vw, 20px) 0;
+  }
+  /* ======================== */
+  /* CONNECT BLOCK */
+  /* ========================= */
+  .connect-block {
+    width: 85%;
+    padding: clamp(15px, 1.5vw, 15px) clamp(15px, 2vw, 25px) clamp(15px, 3vw, 35px) clamp(15px, 2vw, 25px);
+  }
+  .connect-block p {
+    font-size: clamp(18px, 3vw, 40px);
+    margin-bottom: clamp(15px, 3vw, 30px);
+  }
+  /* ========================= */
+  /* SOCIAL LINKS */
+  /* ========================= */
+  .social-links {
+    gap: clamp(15px, 5vw, 60px);
+  }
+  .social-links img {
+    width: clamp(30px, 6vw, 70px);
+    height: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-content.contact-section {
+    padding: clamp(10px, 3vw, 30px) 0 clamp(10px, 4vw, 40px) 0;
+  }
+  /* ============================= */
+  /* CONTAINER */
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    gap: clamp(5px, 2vw, 20px);
+  }
+  /* ============================= */
+  /* LEFT BLOCK */
+  .contact-form-container {
+    max-width: 400px;
+    padding: clamp(2px, 0.3vw, 3px) clamp(5px, 3vw, 30px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  /* ============================= */
+  /* TITLE */
+  h2 {
+    margin: clamp(2px, 0.3vw, 3px) 0 0 0;
+    font-size: clamp(14px, 2.5vw, 25px);
+  }
+  /* ============================= */
+  /* FORM GROUP */
+  .form-group {
+    gap: clamp(1px, 0.3vw, 3px);
+    margin-top: clamp(3px, 1vw, 10px);
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+  /* ============================= */
+  /* INPUTS */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: clamp(3px, 0.5vw, 8px);
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  /* TEXTAREA */
+  textarea {
+    min-height: clamp(20px, 7vh, 70px);
+  }
+  /* ============================= */
+  /* CONSENT */
+  .consent {
+    font-size: clamp(13px, 1.2vw, 15px);
+  }
+  /* ============================= */
+  /* BUTTON */
+  button {
+    width: 70%;
+    padding: clamp(5px, 0.6vw, 6px);
+    margin: clamp(5px, 1.5vw, 15px) clamp(5px, 5vw, 60px);
+    font-size: clamp(16px, 2vw, 22px);
+  }
+  /* ========================= */
+  /* RIGHT BLOCK */
+  /* ========================= */
+  .contact-info-block {
+    gap: clamp(15px, 3vw, 30px);
+    margin: clamp(20px, 1.8vw, 30px) 0 clamp(2px, 0.5vw, 5px) clamp(20px, 5vw, 60px);
+    padding: clamp(5px, 2vw, 15px);
+    width: 60%;
+    max-width: clamp(100px, 28vw, 280px);
+  }
+  /* ========================= */
+  /* LOCATION CARD */
+  /* ========================= */
+  .location-card {
+    padding: clamp(3px, 1vw, 10px);
+  }
+  /* ========================= */
+  /* TEXT ELEMENTS */
+  /* ========================= */
+  .icon {
+    font-size: clamp(20px, 3vw, 30px);
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .title {
+    font-size: clamp(10px, 3vw, 30px);
+    font-weight: 700;
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .coordinates {
+    font-size: clamp(14px, 1.5vw, 18px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  .city {
+    font-size: clamp(10px, 2vw, 20px);
+    margin: clamp(5px, 1.5vw, 15px) 0 clamp(2px, 0.5vw, 5px) 0;
+  }
+  /* ======================== */
+  /* CONNECT BLOCK */
+  /* ========================= */
+  .connect-block {
+    width: 80%;
+    padding: clamp(5px, 1vw, 10px) clamp(15px, 2vw, 25px) clamp(25px, 1vw, 15px) clamp(15px, 2vw, 25px);
+  }
+  .connect-block p {
+    font-size: clamp(18px, 3vw, 40px);
+    margin-bottom: clamp(15px, 3vw, 30px);
+  }
+  /* ========================= */
+  /* SOCIAL LINKS */
+  /* ========================= */
+  .social-links {
+    gap: clamp(15px, 5vw, 60px);
+  }
+  .social-links img {
+    width: clamp(30px, 6vw, 70px);
+    height: auto;
+  }
+  .footer-content {
+    margin-top: aut0;
+    padding: clamp(2px, 0.5vw, 5px) 0;
+  }
+}
+@media (max-width: 820px) {
+  .main-content.contact-section {
+    padding: clamp(10px, 9vw, 100px) 0 clamp(10px, 11vw, 120px) 0;
+  }
+  /* ============================= */
+  /* CONTAINER */
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    gap: clamp(5px, 2vw, 20px);
+  }
+  /* ============================= */
+  /* LEFT BLOCK */
+  .contact-form-container {
+    max-width: 450px;
+    padding: clamp(2px, 0.3vw, 3px) clamp(5px, 3vw, 30px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  /* ============================= */
+  /* TITLE */
+  h2 {
+    margin: clamp(2px, 0.3vw, 3px) 0 0 0;
+    font-size: clamp(14px, 2.5vw, 25px);
+  }
+  /* ============================= */
+  /* FORM GROUP */
+  .form-group {
+    gap: clamp(1px, 0.3vw, 3px);
+    margin-top: clamp(3px, 1vw, 10px);
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+  /* ============================= */
+  /* INPUTS */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: clamp(3px, 0.5vw, 8px);
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  /* TEXTAREA */
+  textarea {
+    min-height: clamp(20px, 7vh, 70px);
+  }
+  /* ============================= */
+  /* CONSENT */
+  .consent {
+    font-size: clamp(13px, 1.2vw, 15px);
+  }
+  /* ============================= */
+  /* BUTTON */
+  button {
+    width: 70%;
+    padding: clamp(5px, 0.6vw, 6px);
+    margin: clamp(5px, 1.5vw, 15px) clamp(5px, 6vw, 70px);
+    font-size: clamp(16px, 2vw, 22px);
+  }
+  /* ========================= */
+  /* RIGHT BLOCK */
+  /* ========================= */
+  .contact-info-block {
+    gap: clamp(15px, 3vw, 30px);
+    margin: clamp(20px, 1.8vw, 30px) 0 clamp(2px, 0.5vw, 5px) clamp(20px, 2vw, 30px);
+    padding: clamp(5px, 2vw, 15px);
+    width: 70%;
+    max-width: clamp(100px, 28vw, 280px);
+  }
+  /* ========================= */
+  /* LOCATION CARD */
+  /* ========================= */
+  .location-card {
+    padding: clamp(3px, 1vw, 10px);
+  }
+  /* ========================= */
+  /* TEXT ELEMENTS */
+  /* ========================= */
+  .icon {
+    font-size: clamp(20px, 3vw, 30px);
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .title {
+    font-size: clamp(10px, 3vw, 30px);
+    font-weight: 700;
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .coordinates {
+    font-size: clamp(14px, 1.5vw, 18px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  .city {
+    font-size: clamp(10px, 2vw, 20px);
+    margin: clamp(5px, 1.5vw, 15px) 0 clamp(2px, 0.5vw, 5px) 0;
+  }
+  /* ======================== */
+  /* CONNECT BLOCK */
+  /* ========================= */
+  .connect-block {
+    width: 80%;
+    padding: clamp(5px, 1vw, 10px) clamp(15px, 2vw, 25px) clamp(25px, 1vw, 15px) clamp(15px, 2vw, 25px);
+  }
+  .connect-block p {
+    font-size: clamp(18px, 3vw, 40px);
+    margin-bottom: clamp(15px, 3vw, 30px);
+  }
+  /* ========================= */
+  /* SOCIAL LINKS */
+  /* ========================= */
+  .social-links {
+    gap: clamp(15px, 5vw, 60px);
+  }
+  .social-links img {
+    width: clamp(30px, 6vw, 70px);
+    height: auto;
+  }
+  .footer-content {
+    margin-top: aut0;
+    padding: clamp(2px, 0.5vw, 5px) 0;
+  }
+}
+/* ============================= */
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .main-content.contact-section {
+    padding: clamp(10px, 9vw, 100px) 0 clamp(10px, 11vw, 120px) 0;
+  }
+  /* ============================= */
+  /* CONTAINER */
+  .contact-container {
+    max-width: 1200px;
+    max-height: 825px;
+    margin: 0 auto;
+    padding: 0;
+    gap: clamp(5px, 2vw, 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* ============================= */
+  /* LEFT BLOCK */
+  .contact-form-container {
+    max-width: 450px;
+    padding: clamp(2px, 0.3vw, 3px) clamp(5px, 3vw, 30px);
+    margin-top: clamp(10px, 2vw, 20px);
+    display: block;
+    height: auto;
+  }
+  /* ============================= */
+  /* TITLE */
+  h2 {
+    margin: clamp(2px, 0.3vw, 3px) 0 0 0;
+    font-size: clamp(14px, 2.5vw, 25px);
+  }
+  /* ============================= */
+  /* FORM GROUP */
+  .form-group {
+    gap: clamp(1px, 0.3vw, 3px);
+    margin-top: clamp(3px, 1vw, 10px);
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+  /* ============================= */
+  /* INPUTS */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: clamp(3px, 0.5vw, 8px);
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  /* TEXTAREA */
+  textarea {
+    min-height: clamp(20px, 5vh, 70px);
+  }
+  /* ============================= */
+  /* CONSENT */
+  .consent {
+    font-size: clamp(13px, 1.2vw, 15px);
+  }
+  /* ============================= */
+  /* BUTTON */
+  button {
+    width: 70%;
+    padding: clamp(5px, 0.6vw, 6px);
+    margin: clamp(5px, 1.5vw, 15px) clamp(5px, 6vw, 70px);
+    font-size: clamp(16px, 2vw, 22px);
+  }
+  /* ========================= */
+  /* RIGHT BLOCK */
+  /* ========================= */
+  .contact-info-block {
+    gap: clamp(15px, 3vw, 30px);
+    margin: clamp(20px, 1.8vw, 30px) 0 clamp(2px, 0.5vw, 5px) clamp(20px, 2vw, 30px);
+    padding: clamp(5px, 2vw, 15px);
+    width: 70%;
+    max-width: clamp(100px, 28vw, 280px);
+  }
+  /* ========================= */
+  /* LOCATION CARD */
+  /* ========================= */
+  .location-card {
+    padding: clamp(3px, 1vw, 10px);
+  }
+  /* ========================= */
+  /* TEXT ELEMENTS */
+  /* ========================= */
+  .icon {
+    font-size: clamp(20px, 3vw, 30px);
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .title {
+    font-size: clamp(10px, 3vw, 30px);
+    font-weight: 700;
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .coordinates {
+    font-size: clamp(14px, 1.5vw, 18px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  .city {
+    font-size: clamp(10px, 2vw, 20px);
+    margin: clamp(5px, 1.5vw, 15px) 0 clamp(2px, 0.5vw, 5px) 0;
+  }
+  /* ======================== */
+  /* CONNECT BLOCK */
+  /* ========================= */
+  .connect-block {
+    width: 80%;
+    padding: clamp(5px, 1vw, 10px) clamp(15px, 2vw, 25px) clamp(25px, 1vw, 15px) clamp(15px, 2vw, 25px);
+  }
+  .connect-block p {
+    font-size: clamp(18px, 3vw, 40px);
+    margin-bottom: clamp(15px, 3vw, 30px);
+  }
+  /* ========================= */
+  /* SOCIAL LINKS */
+  /* ========================= */
+  .social-links {
+    gap: clamp(15px, 5vw, 60px);
+  }
+  .social-links img {
+    width: clamp(30px, 6vw, 70px);
+    height: auto;
+  }
+  .footer-content {
+    margin-top: aut0;
+    padding: clamp(2px, 0.5vw, 5px) 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content.contact-section {
+    padding: clamp(10px, 36vw, 360px) 0 clamp(10px, 37vw, 370px) 0;
+  }
+  /* ============================= */
+  /* CONTAINER */
+  .contact-container {
+    max-width: 800px;
+    max-height: 590px;
+    margin: 0 auto;
+    padding: 0;
+    gap: clamp(5px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* ============================= */
+  /* LEFT BLOCK */
+  .contact-form-container {
+    max-width: 330px;
+    padding: clamp(2px, 0.3vw, 3px) clamp(5px, 3vw, 30px);
+    margin: clamp(5px, 1vw, 10px) auto;
+    display: block;
+    height: auto;
+  }
+  /* ============================= */
+  /* TITLE */
+  h2 {
+    margin: clamp(2px, 0.3vw, 3px) 0 0 0;
+    font-size: clamp(14px, 2.5vw, 25px);
+  }
+  /* ============================= */
+  /* FORM GROUP */
+  .form-group {
+    gap: clamp(1px, 0.3vw, 3px);
+    margin-top: clamp(3px, 1vw, 10px);
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+  /* ============================= */
+  /* INPUTS */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: clamp(3px, 0.5vw, 8px);
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  /* TEXTAREA */
+  textarea {
+    min-height: clamp(20px, 5vh, 70px);
+  }
+  /* ============================= */
+  /* CONSENT */
+  .consent {
+    font-size: clamp(13px, 1.2vw, 15px);
+  }
+  /* ============================= */
+  /* BUTTON */
+  button {
+    width: 70%;
+    padding: clamp(5px, 0.6vw, 6px);
+    margin: clamp(5px, 1.5vw, 15px) clamp(5px, 10vw, 100px);
+    font-size: clamp(10px, 1.5vw, 15px);
+  }
+  /* ========================= */
+  /* RIGHT BLOCK */
+  /* ========================= */
+  .contact-info-block {
+    gap: clamp(15px, 3vw, 30px);
+    margin: clamp(20px, 1.8vw, 30px) 0 clamp(2px, 0.5vw, 5px) clamp(20px, 16vw, 100px);
+    padding: clamp(5px, 2vw, 15px);
+    width: 100%;
+    max-width: clamp(100px, 68vw, 680px);
+    flex-direction: row;
+  }
+  /* ========================= */
+  /* LOCATION CARD */
+  /* ========================= */
+  .location-card {
+    padding: clamp(3px, 1vw, 10px);
+    margin: 0  clamp(5px, 2vw, 20px) 0 0;
+    width: 100%;
+  }
+  /* ========================= */
+  /* TEXT ELEMENTS */
+  /* ========================= */
+  .icon {
+    font-size: clamp(20px, 3vw, 30px);
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .title {
+    font-size: clamp(10px, 3vw, 30px);
+    font-weight: 700;
+    margin: clamp(5px, 1vw, 10px) 0;
+  }
+  .coordinates {
+    font-size: clamp(14px, 1.5vw, 18px);
+    margin-top: clamp(10px, 2vw, 20px);
+  }
+  .city {
+    font-size: clamp(10px, 2vw, 20px);
+    margin: clamp(5px, 1.5vw, 15px) 0 clamp(2px, 0.5vw, 5px) 0;
+  }
+  /* ======================== */
+  /* CONNECT BLOCK */
+  /* ========================= */
+  .connect-block {
+    width: 80%;
+    padding: clamp(5px, 1vw, 10px) clamp(15px, 2vw, 25px) clamp(25px, 1vw, 15px) clamp(15px, 2vw, 25px);
+  }
+  .connect-block p {
+    font-size: clamp(18px, 3vw, 40px);
+    margin-bottom: clamp(15px, 3vw, 30px);
+  }
+  /* ========================= */
+  /* SOCIAL LINKS */
+  /* ========================= */
+  .social-links {
+    gap: clamp(15px, 5vw, 60px);
+  }
+  .social-links img {
+    width: clamp(30px, 6vw, 70px);
+    height: auto;
+  }
+  .footer-content {
+    margin-top: clamp(2px, 8vw, 80px);
+    padding: clamp(2px, 0.5vw, 5px) 0;
+  }
 }
 </style>

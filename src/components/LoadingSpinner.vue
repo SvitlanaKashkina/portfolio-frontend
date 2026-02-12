@@ -27,16 +27,14 @@ const props = defineProps({
   z-index: 999;
   pointer-events: all;
 }
-
 .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #1FE7FF;
+  border: clamp(3px, 0.5vw, 6px) solid #f3f3f3;
+  border-top: clamp(3px, 0.5vw, 6px) solid #1FE7FF;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: clamp(30px, 5vw, 60px);
+  height: clamp(30px, 5vw, 60px);
   animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

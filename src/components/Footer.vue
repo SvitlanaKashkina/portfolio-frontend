@@ -9,10 +9,10 @@
 <style scoped>
 footer {
   position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding:  2px 0 3px 0;
-  height: 40px;
+  padding: clamp(5px, 2vh, 20px) 0;
   box-sizing: border-box;
   background-color: #272E37;
 }
@@ -20,16 +20,16 @@ footer::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 5rem;
-  right: 5rem;
+  left: clamp(20px, 5vw, 80px);
+  right: clamp(20px, 5vw, 80px);
   height: 1px;
   background-color: rgba(255, 255, 255, 0.2);
 }
 .footer-content {
   display: flex;
   justify-content: center;
-  gap: clamp(40px, 8vw, 100px);
-  font-size: 0.8rem;
-  margin-top: 0.8%;
+  gap: clamp(20px, 7vw, 70px);
+  font-size: clamp(0.7rem, 1.6vw, 0.9rem);
+  text-align: center;
 }
 </style>

@@ -3,31 +3,36 @@
   --background-color: #272E37;
   --font-family: Arial, sans-serif;
 }
+
 html,
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: var(--background-color);
   font-family: var(--font-family);
 }
+
 #app {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
+  max-width: 1920px;
+  margin: 0 auto;
   background-color: var(--background-color);
+  box-sizing: border-box;
 }
+
 .main-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
+
 footer {
   text-align: center;
   color: azure;
-}
-* {
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+  box-sizing: border-box;
 }

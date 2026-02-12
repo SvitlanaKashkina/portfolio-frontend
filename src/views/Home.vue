@@ -5,6 +5,7 @@
   import githubIcon from '../assets/icons/github.png'
   import linkedinIcon from '../assets/icons/linkedin.png'
   import emailIcon from '../assets/icons/email.png'
+  import Footer from '../components/Footer.vue';
 
   const heroVideo = ref(null)
   const loading = ref(true)
@@ -117,119 +118,295 @@
 
 
 <style >
-/* General background and text */
+/* =========================
+   General background
+========================= */
 .home-page {
-  flex: 1;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background-color: #272E37;
   color: #1FE7FF;
-  min-height: 100vh;
   font-family: Arial, sans-serif;
 }
-/* Container Home */
-#home {
+
+/* =========================
+   Home container
+========================= */
+.content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  color: white;
-  margin: 80px 0 0 0;
-  padding: 40px;
-  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0;
   box-sizing: border-box;
-  gap: 40px;
-  flex-wrap: wrap;
+  gap: clamp(24px, 4vw, 40px);
 }
-/* Container for two blocks */
-#home .text-photo-container {
+
+/* =========================
+   Two blocks wrapper
+========================= */
+.text-photo-container {
   display: flex;
   width: 100%;
-  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 5vw, 60px);
   flex-wrap: wrap;
-
+  margin-top: clamp(1px, 14vh, 180px);
+  margin-bottom: 0%;
 }
-/* Left block */
+
+/* =========================
+   Left block (TEXT)
+========================= */
 .text-block {
-  flex: 1;
-  justify-content: space-between;
-  height: 100%;
-  width: calc(66.66% - 20px);
-  min-width: 250px;
-  padding: 20px;
-  margin: 100px 50px 15px 150px;
+  flex: 1 1 400px;
+  max-width: 1000px;
+  padding: clamp(5px, 3vw, 24px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  margin-top: clamp(1px, 5vh, 70px);
+  margin-bottom: 0%;
+  margin-right: 0%;
 }
+
+/* Main title */
 .text-block p:first-of-type {
-  font-size: 4.8rem;
+  font-size: clamp(2.4rem, 4.5vw, 4.5rem);
   font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 15px 0 15px 0;
-  color: #1FE7FF;
-}
-
-.text-block p:nth-of-type(2) {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 3.5rem;
-  margin: 15px 0 15px 0;
-  color: #1FE7FF;
-}
-
-.text-block p:nth-of-type(3) {
-  font-size: 1.3rem;
   text-align: center;
-  line-height: 1.5;
-  margin: 55px 45px 80px 45px;
-  padding: 0 65px 0 65px;
+  margin: 0;
+  color: #1FE7FF;
 }
-/* Icons */
+
+/* Subtitle */
+.text-block p:nth-of-type(2) {
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  text-align: center;
+  margin: clamp(6px, 2vw, 16px) 0;
+  color: #1FE7FF;
+}
+
+/* Description */
+.text-block p:nth-of-type(3) {
+  font-size: clamp(1rem, 1.6vw, 1.6rem);
+  line-height: 1.6;
+  text-align: center;
+  margin: clamp(5px, 5vw, 70px) auto;
+  padding: 0 clamp(5px, 4vw, 65px);
+  max-width: 800px;
+}
+
+/* =========================
+   Icons
+========================= */
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 20px;
+  gap: clamp(14px, 4vw, 40px);
+  margin-top: clamp(5px, 5vw, 40px);
 }
+
 .social-icons img {
-  width: 50px;
-  height: 50px;
+  width: clamp(30px, 6vw, 60px);
+  height: clamp(30px, 6vw, 60px);
   cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
+
 .social-icons img:hover {
   transform: scale(1.2);
   filter: brightness(1.5);
 }
-/* Right block */
+
+/* =========================
+   Right block (PHOTO / VIDEO)
+========================= */
 .photo-block {
-  width: 470px;
-  height: 640px;
-  max-width: 30%;
-  margin: 30px 80px 0 0;
+  flex: 1 1 280px;
+  max-width: 440px;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
-  overflow: hidden;
+  margin: clamp(1px, 6vh, 100px) auto 0 auto;
+  margin-right: clamp(1px, 5vw, 40px);
   border: 3px solid #00f6ff;
-  border-radius: 10px;
-  padding: 3px;
+  border-radius: 12px;
   box-sizing: border-box;
+  overflow: hidden;
   box-shadow:
     0 10px 25px rgba(0, 0, 0, 0.35),
     0 4px 8px rgba(0, 0, 0, 0.25);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+
 .photo-block img,
 .photo-block video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+}
+
+/* =========================
+   Tablets / small laptops
+========================= */
+@media (max-width: 1280px) {
+  .text-photo-container {
+    margin-top: clamp(1px, 7vh, 70px);
+    margin-bottom: 0;
+    gap: clamp(10px, 1vw, 10px);
+    flex-direction: column;
+  }
+  .text-block {
+    margin-top: clamp(1px, 1vh,10px);
+    margin-bottom: 0;
+    margin-right: clamp(1px, 15vw, 150px);
+  }
+    /* Main title */
+  .text-block p:first-of-type {
+    font-size: clamp(2rem, 4vw, 4.5rem);
+  }
+  /* Subtitle */
+  .text-block p:nth-of-type(2) {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+  }
+  /* Description */
+  .text-block p:nth-of-type(3) {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    margin: clamp(5px, 3vw, 30px) auto;
+  }
+  .social-icons {
+    margin-top: clamp(5px, 1vw, 10px);
+  }
+  .photo-block {
+    margin: 0 clamp(1px, 40vw, 400px);;
+    margin-right: clamp(1px, 37vw, 370px);
+    max-width: 400px;
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .text-photo-container {
+    margin-top: clamp(1px, 7vh, 70px);
+    margin-bottom: 0;
+    gap: clamp(10px, 1vw, 10px);
+    flex-direction: column;
+    padding: 0;
+  }
+  .text-block {
+    flex: 1;
+    margin: clamp(1px, 2vh,20px) auto;
+    padding: clamp(1px, 1.5vh, 15px) 0;
+  }
+    /* Main title */
+  .text-block p:first-of-type {
+    font-size: clamp(2rem, 3vw, 4rem);
+    margin: 0;
+  }
+  /* Subtitle */
+  .text-block p:nth-of-type(2) {
+    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    margin: 0;
+  }
+  /* Description */
+  .text-block p:nth-of-type(3) {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    margin: clamp(5px, 1vw, 10px) auto;
+  }
+  .social-icons {
+    margin-top: clamp(5px, 1vw, 10px);
+    margin-bottom: 0;
+  }
+  .photo-block {
+    margin: 0 auto;
+    max-width: 370px;
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-photo-container {
+    margin-top: clamp(1px, 7vh, 70px);
+    margin-bottom: 0;
+    gap: clamp(10px, 1vw, 10px);
+    flex-direction: column;
+    padding: 0;
+  }
+  .text-block {
+    flex: 1;
+    margin: clamp(1px, 2vh,20px) auto;
+    padding: clamp(1px, 1.5vh, 15px) 0;
+  }
+    /* Main title */
+  .text-block p:first-of-type {
+    font-size: clamp(2rem, 3vw, 4rem);
+    margin: clamp(5px, 1vw, 10px) auto;
+  }
+  /* Subtitle */
+  .text-block p:nth-of-type(2) {
+    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    margin: clamp(5px, 3vw, 30px) auto;
+  }
+  /* Description */
+  .text-block p:nth-of-type(3) {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    margin: clamp(5px, 3vw, 30px) auto;
+  }
+  .social-icons {
+    margin-top: clamp(5px, 2vw, 20px);
+    margin-bottom: 0;
+  }
+  .photo-block {
+    margin: 0 auto;
+    max-width: 400px;
+    max-height: 250px;
+  }
+}
+
+/* =========================
+   Small screens
+========================= */
+@media (max-width: 600px) {
+  .text-photo-container {
+    margin-top: clamp(1px, 7vh, 70px);
+    margin-bottom: 0;
+    gap: clamp(10px, 1vw, 10px);
+    flex-direction: column;
+    padding: 0;
+  }
+  .text-block {
+    flex: 1;
+    margin: clamp(1px, 1.5vh, 15px) auto;
+    padding: clamp(1px, 1.5vh, 15px) 0;
+  }
+    /* Main title */
+  .text-block p:first-of-type {
+    font-size: clamp(2rem, 2.5vw, 2.5rem);
+    margin: clamp(5px, 2vw, 20px) auto;
+  }
+  /* Subtitle */
+  .text-block p:nth-of-type(2) {
+    font-size: clamp(1.8rem, 1vw, 1rem);
+    margin: clamp(5px, 1.5vw, 15px) auto;
+  }
+  /* Description */
+  .text-block p:nth-of-type(3) {
+    font-size: clamp(1rem, 1vw, 1rem);
+    margin: clamp(5px, 3vw, 30px) auto;
+  }
+  .social-icons {
+    margin-top: clamp(5px, 2vw, 20px);
+    margin-bottom: 0;
+  }
+  .photo-block {
+    margin: 0 auto;
+    max-width: 260px;
+    max-height: 190px;
+  }
 }
 </style>
