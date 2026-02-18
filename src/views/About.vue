@@ -102,7 +102,7 @@ const getPhotoClass = (index) => {
             </template>
 
             <!-- Certificate section -->
-            <h2>Zertifikate</h2>
+            <h2>Certificates</h2>
             <ul class="certificates-list">
               <li v-for="cert in certificates" :key="cert.id">
                 {{ cert.name }}{{ cert.issuer ? `, ${cert.issuer}` : '' }}

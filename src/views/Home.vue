@@ -182,9 +182,9 @@
 
 /* Subtitle */
 .text-block p:nth-of-type(2) {
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-size: clamp(1.8rem, 3vw, 3rem);
   text-align: center;
-  margin: clamp(6px, 2vw, 16px) 0;
+  margin: clamp(6px, 2vw, 20px) 0;
   color: #1FE7FF;
 }
 
@@ -193,9 +193,9 @@
   font-size: clamp(1rem, 1.6vw, 1.6rem);
   line-height: 1.6;
   text-align: center;
-  margin: clamp(5px, 5vw, 70px) auto;
-  padding: 0 clamp(5px, 4vw, 65px);
-  max-width: 800px;
+  margin: clamp(5px, 5vw, 70px) 0;
+  padding: 0;
+  width: 100%;
 }
 
 /* =========================
