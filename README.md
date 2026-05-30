@@ -1,99 +1,114 @@
-# Portfolio Web Application (Full-Stack)
+# Portfolio Web Application
 
-This is my **personal portfolio website**, consisting of **frontend (Vue.js)** and **backend (Java Spring Boot)** components.
-It demonstrates my skills as a **Full-Stack Developer**, including building REST APIs, integrating with databases, handling frontend interactivity, and deploying applications.
-You can view the live version here: [https://www.svitlana-kashkina.com](https://www.svitlana-kashkina.com)
+A full-stack portfolio web application designed and developed to showcase my software engineering projects, technical skills, and professional experience.
+The project consists of a modern frontend built with Vue.js and a scalable backend developed with Java Spring Boot. It demonstrates practical experience in designing RESTful APIs, database integration, cloud storage, caching, messaging systems, containerization, and modern frontend development.
 
----
-
-## Features
-
-### Backend
-
-- REST API for managing portfolio projects
-- Contact form messages saved in PostgreSQL
-- Structured architecture:
-  - `controller/` — REST endpoints
-  - `service/` — business logic
-  - `repository/` — database access (PostgreSQL integration)
-  - `entity/` — JPA entities
-  - `dto/` — data transfer objects
-  - `exception/` — custom exceptions
-  - `config/` — configuration (includes database, Redis, Kafka settings)
-  - `redis/` — Redis configuration and caching
-  - `kafka/` — Kafka producers and consumers
-  - `docker/` — Dockerfile and Docker Compose YAML for containerization
-- Global exception handling
-- Logging setup
-- Email notifications using Spring Mail
-- Caching and messaging: Redis & Kafka
-- File storage with Amazon S3 (AWS)
-- Docker support for containerization (Dockerfile & Docker Compose)
-- Unit testing with JUnit
-
-### Frontend
-
-- Responsive UI using **Vue.js**
-- JavaScript (ES6+) for dynamic functionality
-- Axios for API communication with backend
-- Global exception handling and error messages
-- Loading spinners for asynchronous operations
-- Component-based architecture for reusable UI elements
-- Routing using Vue Router
-- Form validations and interactive portfolio components
+Live Demo: https://www.svitlana-kashkina.com
 
 ---
 
-## Technologies Used
+## Architecture
 
-### Backend
+Frontend
+The frontend is developed using Vue.js 3 and follows a component-based architecture.
 
+Key responsibilities:
+- Responsive user interface
+- Client-side routing
+- API communication
+- Form validation
+- Error handling
+- Loading state management
+
+Backend
+The backend is implemented using Spring Boot and follows a layered architecture.
+
+- Layers include:
+- Controller Layer – REST API endpoints
+- Service Layer – Business logic implementation
+- Repository Layer – Database access using Spring Data JPA
+- DTO Layer – Data transfer between client and server
+- Entity Layer – Database entities
+- Exception Layer – Centralized error handling
+- Configuration Layer – Application configuration and infrastructure setup
+
+---
+
+## Tech Stack
+
+Backend
 - Java 17
-- Spring Boot 3.x
-- Hibernate / Spring Data JPA
+- Spring Boot 3
+- Spring Data JPA
+- Hibernate
 - PostgreSQL
 - Lombok
 - Spring Mail
 - Redis
-- Kafka
+- Apache Kafka
+- Amazon S3 (AWS)
 - Docker
 - Maven
-- Amazon S3 (AWS)
-- IntelliJ IDEA
-
-### Frontend
-
-- JavaScript (ES6+)
+  
+Frontend
 - Vue.js 3
+- JavaScript (ES6+)
 - Vue Router
 - Axios
-- HTML / CSS
-- Global exception handling
-- Spinner component
+- HTML5
+- CSS3
+
+Development Tools
+- Git & GitHub
+- IntelliJ IDEA
 - Visual Studio Code
-
-### Tools & Platforms
-
-- GitHub (version control)
-- Maven (backend build tool)
-- Docker (containerization)
-- PostgreSQL (database)
-- AWS S3 (cloud storage)
-- IntelliJ IDEA, Visual Studio Code
-
----
-
-## Prerequisites
-
-- Java 17
+- Docker
 - Maven
-- PostgreSQL
-- Node.js & npm (for frontend)
-
+  
 ---
 
-## Links
+## Features
 
-- **Frontend Repository:** [GitHub Frontend](https://github.com/SvitlanaKashkina/portfolio-frontend-vue-javascript)
-- **Backend Repository:** [GitHub Backend](https://github.com/SvitlanaKashkina/portfolio-backend-java-springboot)
-- **Live Demo / Portfolio Website:** [https://www.svitlana-kashkina.com](https://www.svitlana-kashkina.com)
+Frontend Features
+- Responsive design for desktop and mobile devices
+- Vue Router navigation
+- Dynamic content rendering
+- Form validation
+- Reusable Vue components
+- Loading indicators for asynchronous requests
+- Centralized error handling
+- Axios integration for backend communication
+
+Backend Features
+- RESTful API architecture
+- PostgreSQL database integration
+- Contact form message persistence
+- Contact form message persistence
+- Global exception handling
+- Structured logging
+- Email notifications with Spring Mail
+- Redis caching
+- Apache Kafka messaging
+- Amazon S3 file storage integration
+- Docker containerization support
+- Unit testing with JUnit
+  
+---
+
+## Infrastructure & DevOps
+
+The application demonstrates practical experience with modern infrastructure technologies:
+- Docker-based containerization
+- PostgreSQL database management
+- Redis caching
+- Kafka event messaging
+- AWS S3 cloud storage
+- Environment-based configuration management
+  
+---
+
+## Contact
+
+For collaboration, career opportunities, or project-related questions:
+- 📧 Email: [k.svitlana@web.de](mailto:k.svitlana@web.de)
+- 🔗 LinkedIn: [Svitlana Kashkina](https://www.linkedin.com/in/svitlana-kashkina-12a0922b4/)
